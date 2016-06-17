@@ -12,13 +12,13 @@ Background* Background::CreateBackground()
 {
     do
     {
-        Background* pList = new Background;
-        if (pList && pList->Init())
+        Background* pRet = new Background;
+        if (pRet && pRet->Init())
         {
-            pList->autorelease();
-            return pList;
+            pRet->autorelease();
+            return pRet;
         }
-        delete pList;
+        delete pRet;
     } while (false);
     CCLog("Function Background::CreateBackground Error!");
     return NULL;
@@ -28,8 +28,6 @@ bool Background::Init()
 {
     do
     {
-        CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-
         CCNodeLoaderLibrary * ccNodeLoaderLibraryLeft = CCNodeLoaderLibrary::newDefaultCCNodeLoaderLibrary();
         CCBReader * ccbReaderLeft = new CCBReader(ccNodeLoaderLibraryLeft);
         CCNode * bgLeft = ccbReaderLeft->readNodeGraphFromFile("ccb/background.ccbi", this);
@@ -50,8 +48,8 @@ bool Background::Init()
         CCDrawNode *shapeLeft = CCDrawNode::create();
         static CCPoint triangleLeft[3];
         triangleLeft[0] = ccp(0, 0);
-        triangleLeft[1] = ccp(visibleSize.width,0);
-        triangleLeft[2] = ccp(0,visibleSize.height);
+        triangleLeft[1] = ccp(SCREEN_WIDTH,0);
+        triangleLeft[2] = ccp(0,SCREEN_HEIGHT);
         static ccColor4F green = {0, 1, 0, 1};
         shapeLeft->drawPolygon(triangleLeft, 3, green, 0, green);
         clippingNodeLeft->setStencil(shapeLeft);
@@ -62,9 +60,9 @@ bool Background::Init()
         clippingNodeRight->addChild(bgRight);
         CCDrawNode *shapeRight = CCDrawNode::create();
         static CCPoint triangleRight[3];
-        triangleRight[0] = ccp(visibleSize.width, visibleSize.height);
-        triangleRight[1] = ccp(visibleSize.width,0);
-        triangleRight[2] = ccp(0,visibleSize.height);
+        triangleRight[0] = ccp(SCREEN_WIDTH, SCREEN_HEIGHT);
+        triangleRight[1] = ccp(SCREEN_WIDTH,0);
+        triangleRight[2] = ccp(0,SCREEN_HEIGHT);
 //        static ccColor4F green = {0, 1, 0, 1};
         shapeRight->drawPolygon(triangleRight, 3, green, 0, green);
         clippingNodeRight->setStencil(shapeRight);

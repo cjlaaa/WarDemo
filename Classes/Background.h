@@ -9,24 +9,7 @@
 #ifndef Background_h
 #define Background_h
 
-#include "cocos2d.h"
-USING_NS_CC;
-#include "cocos-ext.h"
-USING_NS_CC_EXT;
-using namespace std;
-
-enum
-{
-    enTagBg,
-    enTagLeft,
-};
-
-enum
-{
-    enZOrderBack,
-    enZOrderMiddle,
-    enZOrderFront,
-};
+#include "PublicDef.h"
 
 class Background : public CCLayer
 , public cocos2d::extension::CCBSelectorResolver
