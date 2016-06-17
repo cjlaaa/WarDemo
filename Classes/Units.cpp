@@ -100,17 +100,17 @@ bool UnitsLayer::Init()
     do
     {
         CCPoint unitsPos[10] = {};
-        unitsPos[0] = ccp(SCREEN_WIDTH*0.1,SCREEN_HEIGHT*0.6);
-        unitsPos[1] = ccp(SCREEN_WIDTH*0.15,SCREEN_HEIGHT*0.45);
-        unitsPos[2] = ccp(SCREEN_WIDTH*0.2,SCREEN_HEIGHT*0.3);
-        unitsPos[3] = ccp(SCREEN_WIDTH*0.35,SCREEN_HEIGHT*0.25);
-        unitsPos[4] = ccp(SCREEN_WIDTH*0.5,SCREEN_HEIGHT*0.2);
+        unitsPos[0] = ccp(SCREEN_WIDTH*0.15,SCREEN_HEIGHT*0.6);
+        unitsPos[1] = ccp(SCREEN_WIDTH*0.2,SCREEN_HEIGHT*0.45);
+        unitsPos[2] = ccp(SCREEN_WIDTH*0.25,SCREEN_HEIGHT*0.3);
+        unitsPos[3] = ccp(SCREEN_WIDTH*0.4,SCREEN_HEIGHT*0.25);
+        unitsPos[4] = ccp(SCREEN_WIDTH*0.55,SCREEN_HEIGHT*0.2);
         
-        unitsPos[5] = ccp(SCREEN_WIDTH*0.5,SCREEN_HEIGHT*0.9);
-        unitsPos[6] = ccp(SCREEN_WIDTH*0.65,SCREEN_HEIGHT*0.85);
-        unitsPos[7] = ccp(SCREEN_WIDTH*0.8,SCREEN_HEIGHT*0.8);
-        unitsPos[8] = ccp(SCREEN_WIDTH*0.85,SCREEN_HEIGHT*0.65);
-        unitsPos[9] = ccp(SCREEN_WIDTH*0.9,SCREEN_HEIGHT*0.5);
+        unitsPos[5] = ccp(SCREEN_WIDTH*0.45,SCREEN_HEIGHT*0.8);
+        unitsPos[6] = ccp(SCREEN_WIDTH*0.6,SCREEN_HEIGHT*0.75);
+        unitsPos[7] = ccp(SCREEN_WIDTH*0.75,SCREEN_HEIGHT*0.7);
+        unitsPos[8] = ccp(SCREEN_WIDTH*0.8,SCREEN_HEIGHT*0.55);
+        unitsPos[9] = ccp(SCREEN_WIDTH*0.85,SCREEN_HEIGHT*0.4);
         
         for (int i=enTagUnitMyPos1; i<enTagUnitMax; i++)
         {
