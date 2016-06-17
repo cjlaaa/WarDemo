@@ -120,18 +120,18 @@ bool UnitsLayer::Init()
         
         for (int i=enTagUnitMyPos1; i<enTagUnitMax; i++)
         {
+            Unit* pUnit;
             if(i<5)
             {
-                Unit* pUnit = Unit::CreateUnit(CCRANDOM_0_1()>0.5?enUnitTypeCarMine:enUnitTypeTroopMine);
-                pUnit->setPosition(unitsPos[i]);
-                addChild(pUnit,enZOrderFront,enTagUnitMyPos1+i);
+                pUnit = Unit::CreateUnit(CCRANDOM_0_1()>0.5?enUnitTypeCarMine:enUnitTypeTroopMine);
+                
             }
             else
             {
-                Unit* pUnit = Unit::CreateUnit(CCRANDOM_0_1()>0.5?enUnitTypeCarEnemy:enUnitTypeTroopEnemy);
-                pUnit->setPosition(unitsPos[i]);
-                addChild(pUnit,enZOrderFront,enTagUnitMyPos1+i);
+                pUnit = Unit::CreateUnit(CCRANDOM_0_1()>0.5?enUnitTypeCarEnemy:enUnitTypeTroopEnemy);
             }
+            pUnit->setPosition(unitsPos[i]);
+            addChild(pUnit,enZOrderFront,enTagUnitMyPos1+i);
         }
 
         return true;
