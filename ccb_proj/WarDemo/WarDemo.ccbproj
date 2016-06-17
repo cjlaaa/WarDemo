@@ -27,7 +27,7 @@
 	<key>needRepublish</key>
 	<false/>
 	<key>onlyPublishCCBs</key>
-	<false/>
+	<true/>
 	<key>publishDirectory</key>
 	<string>../../Resources/ccb</string>
 	<key>publishDirectoryAndroid</key>

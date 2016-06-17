@@ -49,6 +49,8 @@ static AppDelegate s_sharedApplication;
     
     [[UIApplication sharedApplication] setStatusBarHidden:true];
     
+    [__glView layoutSubviews];
+    
     cocos2d::CCApplication::sharedApplication()->run();
 
     return YES;

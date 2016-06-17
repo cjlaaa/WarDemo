@@ -1,5 +1,5 @@
 #include "HelloWorldScene.h"
-
+#include "Background.h"
 USING_NS_CC;
 
 CCScene* HelloWorld::scene()
@@ -72,6 +72,9 @@ bool HelloWorld::init()
 
     // add the sprite as a child to this layer
     this->addChild(pSprite, 0);
+    
+    Background* pBg = Background::CreateBackground();
+    addChild(pBg,enZOrderBack,enTagBg);
     
     return true;
 }
