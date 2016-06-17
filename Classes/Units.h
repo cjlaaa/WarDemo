@@ -13,8 +13,10 @@
 
 enum enUnitType
 {
-    enUnitTypeCar1,
-    enUnitTypeCar2,
+    enUnitTypeCarMine,
+    enUnitTypeCarEnemy,
+    enUnitTypeTroopMine,
+    enUnitTypeTroopEnemy,
 };
 
 class Unit : public CCLayer
@@ -33,6 +35,7 @@ public:
     virtual SEL_CallFuncN onResolveCCBCCCallFuncSelector(CCObject * pTarget, const char* pSelectorName);
 protected:
     bool Init(enUnitType eType);
+    CCBAnimationManager* m_animationManager;
 };
 
 enum

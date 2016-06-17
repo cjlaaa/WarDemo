@@ -33,17 +33,23 @@ bool Unit::Init(enUnitType eType)
         CCNode * ccbNode;
         switch (eType)
         {
-            case enUnitTypeCar1:
+            case enUnitTypeCarMine:
                 ccbNode = ccbReader->readNodeGraphFromFile("ccb/car1.ccbi", this);
                 break;
-            case enUnitTypeCar2:
+            case enUnitTypeCarEnemy:
                 ccbNode = ccbReader->readNodeGraphFromFile("ccb/car2.ccbi", this);
+                break;
+            case enUnitTypeTroopMine:
+                ccbNode = ccbReader->readNodeGraphFromFile("ccb/troop1.ccbi", this);
+                break;
+            case enUnitTypeTroopEnemy:
+                ccbNode = ccbReader->readNodeGraphFromFile("ccb/troop2.ccbi", this);
                 break;
             default:
                 break;
         }
-        CCBAnimationManager* animationManagerLeft = ccbReader->getAnimationManager();
-        animationManagerLeft->runAnimationsForSequenceNamed("run");
+        m_animationManager = ccbReader->getAnimationManager();
+        m_animationManager->runAnimationsForSequenceNamed("run");
         ccbReader->release();
         
         addChild(ccbNode);
@@ -106,23 +112,23 @@ bool UnitsLayer::Init()
         unitsPos[3] = ccp(SCREEN_WIDTH*0.4,SCREEN_HEIGHT*0.25);
         unitsPos[4] = ccp(SCREEN_WIDTH*0.55,SCREEN_HEIGHT*0.2);
         
-        unitsPos[5] = ccp(SCREEN_WIDTH*0.45,SCREEN_HEIGHT*0.8);
-        unitsPos[6] = ccp(SCREEN_WIDTH*0.6,SCREEN_HEIGHT*0.75);
-        unitsPos[7] = ccp(SCREEN_WIDTH*0.75,SCREEN_HEIGHT*0.7);
-        unitsPos[8] = ccp(SCREEN_WIDTH*0.8,SCREEN_HEIGHT*0.55);
-        unitsPos[9] = ccp(SCREEN_WIDTH*0.85,SCREEN_HEIGHT*0.4);
+        unitsPos[5] = ccp(SCREEN_WIDTH*0.35,SCREEN_HEIGHT*0.7);
+        unitsPos[6] = ccp(SCREEN_WIDTH*0.5,SCREEN_HEIGHT*0.65);
+        unitsPos[7] = ccp(SCREEN_WIDTH*0.65,SCREEN_HEIGHT*0.6);
+        unitsPos[8] = ccp(SCREEN_WIDTH*0.7,SCREEN_HEIGHT*0.45);
+        unitsPos[9] = ccp(SCREEN_WIDTH*0.75,SCREEN_HEIGHT*0.3);
         
         for (int i=enTagUnitMyPos1; i<enTagUnitMax; i++)
         {
             if(i<5)
             {
-                Unit* pUnit = Unit::CreateUnit(enUnitTypeCar1);
+                Unit* pUnit = Unit::CreateUnit(CCRANDOM_0_1()>0.5?enUnitTypeCarMine:enUnitTypeTroopMine);
                 pUnit->setPosition(unitsPos[i]);
                 addChild(pUnit,enZOrderFront,enTagUnitMyPos1+i);
             }
             else
             {
-                Unit* pUnit = Unit::CreateUnit(enUnitTypeCar2);
+                Unit* pUnit = Unit::CreateUnit(CCRANDOM_0_1()>0.5?enUnitTypeCarEnemy:enUnitTypeTroopEnemy);
                 pUnit->setPosition(unitsPos[i]);
                 addChild(pUnit,enZOrderFront,enTagUnitMyPos1+i);
             }

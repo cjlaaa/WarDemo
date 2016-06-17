@@ -7,7 +7,7 @@
 	<key>currentResolution</key>
 	<integer>0</integer>
 	<key>currentSequenceId</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>fileType</key>
 	<string>CocosBuilder</string>
 	<key>fileVersion</key>
@@ -45,7 +45,7 @@
 									<integer>7</integer>
 									<key>value</key>
 									<array>
-										<string>ccbResources/cars/2/ID_236_01.png</string>
+										<string>ccbResources/troop/1/ID_257_TRIMd-1.png</string>
 										<string>Use regular file</string>
 									</array>
 								</dict>
@@ -58,30 +58,12 @@
 									<key>name</key>
 									<string>displayFrame</string>
 									<key>time</key>
-									<real>0.066666670143604279</real>
+									<real>0.10000000149011612</real>
 									<key>type</key>
 									<integer>7</integer>
 									<key>value</key>
 									<array>
-										<string>ccbResources/cars/2/ID_236_02.png</string>
-										<string>Use regular file</string>
-									</array>
-								</dict>
-								<dict>
-									<key>easing</key>
-									<dict>
-										<key>type</key>
-										<integer>0</integer>
-									</dict>
-									<key>name</key>
-									<string>displayFrame</string>
-									<key>time</key>
-									<real>0.13333334028720856</real>
-									<key>type</key>
-									<integer>7</integer>
-									<key>value</key>
-									<array>
-										<string>ccbResources/cars/2/ID_236_03.png</string>
+										<string>ccbResources/troop/1/ID_257_TRIMd-2.png</string>
 										<string>Use regular file</string>
 									</array>
 								</dict>
@@ -99,7 +81,7 @@
 									<integer>7</integer>
 									<key>value</key>
 									<array>
-										<string>ccbResources/cars/2/ID_236_04.png</string>
+										<string>ccbResources/troop/1/ID_257_TRIMd-3.png</string>
 										<string>Use regular file</string>
 									</array>
 								</dict>
@@ -112,12 +94,12 @@
 									<key>name</key>
 									<string>displayFrame</string>
 									<key>time</key>
-									<real>0.30000001192092896</real>
+									<real>0.26666668057441711</real>
 									<key>type</key>
 									<integer>7</integer>
 									<key>value</key>
 									<array>
-										<string>ccbResources/cars/2/ID_236_06.png</string>
+										<string>ccbResources/troop/1/ID_257_TRIMd-4.png</string>
 										<string>Use regular file</string>
 									</array>
 								</dict>
@@ -130,12 +112,12 @@
 									<key>name</key>
 									<string>displayFrame</string>
 									<key>time</key>
-									<real>0.40000000596046448</real>
+									<real>0.3333333432674408</real>
 									<key>type</key>
 									<integer>7</integer>
 									<key>value</key>
 									<array>
-										<string>ccbResources/cars/2/ID_236_07.png</string>
+										<string>ccbResources/troop/1/ID_257_TRIMd-5.png</string>
 										<string>Use regular file</string>
 									</array>
 								</dict>
@@ -148,12 +130,30 @@
 									<key>name</key>
 									<string>displayFrame</string>
 									<key>time</key>
-									<real>0.5</real>
+									<real>0.43333333730697632</real>
 									<key>type</key>
 									<integer>7</integer>
 									<key>value</key>
 									<array>
-										<string>ccbResources/cars/2/ID_236_08.png</string>
+										<string>ccbResources/troop/1/ID_257_TRIMd-6.png</string>
+										<string>Use regular file</string>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>0</integer>
+									</dict>
+									<key>name</key>
+									<string>displayFrame</string>
+									<key>time</key>
+									<real>0.53333336114883423</real>
+									<key>type</key>
+									<integer>7</integer>
+									<key>value</key>
+									<array>
+										<string>ccbResources/troop/1/ID_257_TRIMd-7.png</string>
 										<string>Use regular file</string>
 									</array>
 								</dict>
@@ -171,7 +171,7 @@
 									<integer>7</integer>
 									<key>value</key>
 									<array>
-										<string>ccbResources/cars/2/ID_236_09.png</string>
+										<string>ccbResources/troop/1/ID_257_TRIMd-8.png</string>
 										<string>Use regular file</string>
 									</array>
 								</dict>
@@ -184,12 +184,30 @@
 									<key>name</key>
 									<string>displayFrame</string>
 									<key>time</key>
-									<real>0.69999998807907104</real>
+									<real>0.66666668653488159</real>
 									<key>type</key>
 									<integer>7</integer>
 									<key>value</key>
 									<array>
-										<string>ccbResources/cars/2/ID_236_10.png</string>
+										<string>ccbResources/troop/1/ID_257_TRIMd-9.png</string>
+										<string>Use regular file</string>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>0</integer>
+									</dict>
+									<key>name</key>
+									<string>displayFrame</string>
+									<key>time</key>
+									<real>0.73333334922790527</real>
+									<key>type</key>
+									<integer>7</integer>
+									<key>value</key>
+									<array>
+										<string>ccbResources/troop/1/ID_257_TRIMd-10.png</string>
 										<string>Use regular file</string>
 									</array>
 								</dict>
@@ -207,7 +225,7 @@
 									<integer>7</integer>
 									<key>value</key>
 									<array>
-										<string>ccbResources/cars/2/ID_236_11.png</string>
+										<string>ccbResources/troop/1/ID_257_TRIMd-11.png</string>
 										<string>Use regular file</string>
 									</array>
 								</dict>
@@ -220,12 +238,30 @@
 									<key>name</key>
 									<string>displayFrame</string>
 									<key>time</key>
-									<real>0.89999997615814209</real>
+									<real>0.86666667461395264</real>
 									<key>type</key>
 									<integer>7</integer>
 									<key>value</key>
 									<array>
-										<string>ccbResources/cars/2/ID_236_12.png</string>
+										<string>ccbResources/troop/1/ID_257_TRIMd-12.png</string>
+										<string>Use regular file</string>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>0</integer>
+									</dict>
+									<key>name</key>
+									<string>displayFrame</string>
+									<key>time</key>
+									<real>0.93333333730697632</real>
+									<key>type</key>
+									<integer>7</integer>
+									<key>value</key>
+									<array>
+										<string>ccbResources/troop/1/ID_257_TRIMd-13.png</string>
 										<string>Use regular file</string>
 									</array>
 								</dict>
@@ -243,7 +279,236 @@
 									<integer>7</integer>
 									<key>value</key>
 									<array>
-										<string>ccbResources/cars/2/ID_236_13.png</string>
+										<string>ccbResources/troop/1/ID_257_TRIMd-14.png</string>
+										<string>Use regular file</string>
+									</array>
+								</dict>
+							</array>
+							<key>name</key>
+							<string>displayFrame</string>
+							<key>type</key>
+							<integer>7</integer>
+						</dict>
+					</dict>
+					<key>1</key>
+					<dict>
+						<key>displayFrame</key>
+						<dict>
+							<key>keyframes</key>
+							<array>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>0</integer>
+									</dict>
+									<key>name</key>
+									<string>displayFrame</string>
+									<key>time</key>
+									<real>0.0</real>
+									<key>type</key>
+									<integer>7</integer>
+									<key>value</key>
+									<array>
+										<string>ccbResources/troop/3/ID_257_TRIMd-01.png</string>
+										<string>Use regular file</string>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>0</integer>
+									</dict>
+									<key>name</key>
+									<string>displayFrame</string>
+									<key>time</key>
+									<real>0.10000000149011612</real>
+									<key>type</key>
+									<integer>7</integer>
+									<key>value</key>
+									<array>
+										<string>ccbResources/troop/3/ID_257_TRIMd-02.png</string>
+										<string>Use regular file</string>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>0</integer>
+									</dict>
+									<key>name</key>
+									<string>displayFrame</string>
+									<key>time</key>
+									<real>0.1666666716337204</real>
+									<key>type</key>
+									<integer>7</integer>
+									<key>value</key>
+									<array>
+										<string>ccbResources/troop/3/ID_257_TRIMd-03.png</string>
+										<string>Use regular file</string>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>0</integer>
+									</dict>
+									<key>name</key>
+									<string>displayFrame</string>
+									<key>time</key>
+									<real>0.23333333432674408</real>
+									<key>type</key>
+									<integer>7</integer>
+									<key>value</key>
+									<array>
+										<string>ccbResources/troop/3/ID_257_TRIMd-04.png</string>
+										<string>Use regular file</string>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>0</integer>
+									</dict>
+									<key>name</key>
+									<string>displayFrame</string>
+									<key>time</key>
+									<real>0.30000001192092896</real>
+									<key>type</key>
+									<integer>7</integer>
+									<key>value</key>
+									<array>
+										<string>ccbResources/troop/3/ID_257_TRIMd-05.png</string>
+										<string>Use regular file</string>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>0</integer>
+									</dict>
+									<key>name</key>
+									<string>displayFrame</string>
+									<key>time</key>
+									<real>0.40000000596046448</real>
+									<key>type</key>
+									<integer>7</integer>
+									<key>value</key>
+									<array>
+										<string>ccbResources/troop/3/ID_257_TRIMd-06.png</string>
+										<string>Use regular file</string>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>0</integer>
+									</dict>
+									<key>name</key>
+									<string>displayFrame</string>
+									<key>time</key>
+									<real>0.5</real>
+									<key>type</key>
+									<integer>7</integer>
+									<key>value</key>
+									<array>
+										<string>ccbResources/troop/3/ID_257_TRIMd-07.png</string>
+										<string>Use regular file</string>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>0</integer>
+									</dict>
+									<key>name</key>
+									<string>displayFrame</string>
+									<key>time</key>
+									<real>0.60000002384185791</real>
+									<key>type</key>
+									<integer>7</integer>
+									<key>value</key>
+									<array>
+										<string>ccbResources/troop/3/ID_257_TRIMd-08.png</string>
+										<string>Use regular file</string>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>0</integer>
+									</dict>
+									<key>name</key>
+									<string>displayFrame</string>
+									<key>time</key>
+									<real>0.69999998807907104</real>
+									<key>type</key>
+									<integer>7</integer>
+									<key>value</key>
+									<array>
+										<string>ccbResources/troop/3/ID_257_TRIMd-09.png</string>
+										<string>Use regular file</string>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>0</integer>
+									</dict>
+									<key>name</key>
+									<string>displayFrame</string>
+									<key>time</key>
+									<real>0.80000001192092896</real>
+									<key>type</key>
+									<integer>7</integer>
+									<key>value</key>
+									<array>
+										<string>ccbResources/troop/3/ID_257_TRIMd-10.png</string>
+										<string>Use regular file</string>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>0</integer>
+									</dict>
+									<key>name</key>
+									<string>displayFrame</string>
+									<key>time</key>
+									<real>0.89999997615814209</real>
+									<key>type</key>
+									<integer>7</integer>
+									<key>value</key>
+									<array>
+										<string>ccbResources/troop/3/ID_257_TRIMd-11.png</string>
+										<string>Use regular file</string>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>0</integer>
+									</dict>
+									<key>name</key>
+									<string>displayFrame</string>
+									<key>time</key>
+									<real>1</real>
+									<key>type</key>
+									<integer>7</integer>
+									<key>value</key>
+									<array>
+										<string>ccbResources/troop/3/ID_257_TRIMd-12.png</string>
 										<string>Use regular file</string>
 									</array>
 								</dict>
@@ -262,7 +527,7 @@
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>car</string>
+				<string>troop</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -304,7 +569,7 @@
 					<dict>
 						<key>baseValue</key>
 						<array>
-							<string>ccbResources/cars/2/ID_236_01.png</string>
+							<string>ccbResources/troop/1/ID_257_TRIMd-1.png</string>
 							<string>Use regular file</string>
 						</array>
 						<key>name</key>
@@ -314,7 +579,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/cars/2/ID_236_01.png</string>
+							<string>ccbResources/troop/1/ID_257_TRIMd-1.png</string>
 						</array>
 					</dict>
 				</array>
@@ -429,9 +694,43 @@
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
-			<real>374.30337524414062</real>
+			<real>356.58145141601562</real>
 			<key>sequenceId</key>
 			<integer>0</integer>
+			<key>soundChannel</key>
+			<dict>
+				<key>keyframes</key>
+				<array/>
+				<key>type</key>
+				<integer>9</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>autoPlay</key>
+			<false/>
+			<key>callbackChannel</key>
+			<dict>
+				<key>keyframes</key>
+				<array/>
+				<key>type</key>
+				<integer>10</integer>
+			</dict>
+			<key>chainedSequenceId</key>
+			<integer>-1</integer>
+			<key>length</key>
+			<real>1</real>
+			<key>name</key>
+			<string>dead</string>
+			<key>offset</key>
+			<real>0.0</real>
+			<key>position</key>
+			<real>1</real>
+			<key>resolution</key>
+			<real>30</real>
+			<key>scale</key>
+			<real>448.79776000976562</real>
+			<key>sequenceId</key>
+			<integer>1</integer>
 			<key>soundChannel</key>
 			<dict>
 				<key>keyframes</key>
