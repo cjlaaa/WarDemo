@@ -74,6 +74,11 @@ bool Background::Init()
     return false;
 }
 
+void Background::Update(float)
+{
+    
+}
+
 SEL_MenuHandler Background::onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char * pSelectorName)
 {
     

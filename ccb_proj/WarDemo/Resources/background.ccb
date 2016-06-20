@@ -45,8 +45,8 @@
 									<integer>3</integer>
 									<key>value</key>
 									<array>
-										<real>2044.7742919921875</real>
-										<real>1025.0794677734375</real>
+										<real>2047.9892578125</real>
+										<real>1018.6494140625</real>
 									</array>
 								</dict>
 								<dict>
@@ -160,8 +160,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>-248.02774047851562</real>
-									<real>403.68362426757812</real>
+									<real>9.173893928527832</real>
+									<real>641.59515380859375</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -232,8 +232,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>424.8555908203125</real>
-									<real>-93.980484008789062</real>
+									<real>575.9615478515625</real>
+									<real>2.4701290130615234</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -857,6 +857,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -952,8 +954,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>1259.03515625</real>
-									<real>1845.7645263671875</real>
+									<real>1207.5948486328125</real>
+									<real>1775.0340576171875</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -1001,68 +1003,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
-					</dict>
-					<dict>
-						<key>baseClass</key>
-						<string>CCSprite</string>
-						<key>children</key>
-						<array/>
-						<key>customClass</key>
-						<string></string>
-						<key>displayName</key>
-						<string>ID_276_12</string>
-						<key>memberVarAssignmentName</key>
-						<string></string>
-						<key>memberVarAssignmentType</key>
-						<integer>0</integer>
-						<key>properties</key>
-						<array>
-							<dict>
-								<key>name</key>
-								<string>anchorPoint</string>
-								<key>type</key>
-								<string>Point</string>
-								<key>value</key>
-								<array>
-									<real>0.5</real>
-									<real>0.5</real>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>scale</string>
-								<key>type</key>
-								<string>ScaleLock</string>
-								<key>value</key>
-								<array>
-									<real>1</real>
-									<real>1</real>
-									<false/>
-									<integer>0</integer>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>ignoreAnchorPointForPosition</string>
-								<key>type</key>
-								<string>Check</string>
-								<key>value</key>
-								<false/>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>displayFrame</string>
-								<key>type</key>
-								<string>SpriteFrame</string>
-								<key>value</key>
-								<array>
-									<string></string>
-									<string>ccbResources/scene/ID_276_12.png</string>
-								</array>
-							</dict>
-						</array>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -1086,8 +1026,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>1571.1534423828125</real>
-									<real>2058.7529296875</real>
+									<real>1209.463623046875</real>
+									<real>1891.5718994140625</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -1158,8 +1098,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>2052</real>
-									<real>1504</real>
+									<real>1963.5869140625</real>
+									<real>1320.7437744140625</real>
 									<integer>0</integer>
 								</array>
 							</dict>

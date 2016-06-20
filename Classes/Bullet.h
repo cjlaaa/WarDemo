@@ -20,14 +20,21 @@ protected:
     bool Init();
 };
 
+enum
+{
+    enTagClippingNodeLeft,
+    enTagClippingNodeRight,
+};
+
 class BulletLayer : public CCLayer
 {
 public:
     static BulletLayer* CreateBulletLayer();
-    void Shoot(enTagUnit shooter,enTagUnit target);
-    
+    void shoot(enTagUnit shooter,enTagUnit target);
+    void Update(float);
 protected:
     bool Init();
+    void moveToTargetCallback(CCNode* pObj);
 };
 
 

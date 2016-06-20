@@ -59,4 +59,10 @@ enum enTagUnit
     enTagUnitMax,
 };
 
+struct FireMsg
+{
+    enTagUnit shooter;
+    enTagUnit target;
+};
+
 #endif /* PublicDef_h */

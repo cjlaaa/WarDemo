@@ -7,6 +7,7 @@
 //
 
 #include "Units.h"
+#include "MainScene.h"
 
 Unit* Unit::CreateUnit(enUnitType eType)
 {
@@ -28,6 +29,8 @@ bool Unit::Init(enUnitType eType)
 {
     do
     {
+        m_nFireCd = FIRE_INTERVAL;
+        
         CCNodeLoaderLibrary * ccNodeLoaderLibrary = CCNodeLoaderLibrary::newDefaultCCNodeLoaderLibrary();
         CCBReader * ccbReader = new CCBReader(ccNodeLoaderLibrary);
         CCNode * ccbNode;
@@ -59,6 +62,46 @@ bool Unit::Init(enUnitType eType)
     return false;
 }
 
+void Unit::Update(float fT)
+{
+    if(m_nFireCd<0)
+    {
+        m_nFireCd = FIRE_INTERVAL;
+        Fire();
+    }
+    else
+    {
+        m_nFireCd -= CCRANDOM_0_1()*10;
+    }
+}
+
+void Unit::Fire()
+{
+    enTagUnit eTarget;
+    
+    if(m_nTag <= enTagUnitMyPos5)
+    {
+//        eTarget = (enTagUnit)(m_nTag + 5);
+        
+        if(CCRANDOM_0_1()<0.2) eTarget = enTagUnitEnemyPos1;
+        else if(CCRANDOM_0_1()<0.4) eTarget = enTagUnitEnemyPos2;
+        else if(CCRANDOM_0_1()<0.6) eTarget = enTagUnitEnemyPos3;
+        else if(CCRANDOM_0_1()<0.8) eTarget = enTagUnitEnemyPos4;
+        else eTarget = enTagUnitEnemyPos5;
+    }
+    else
+    {
+//        eTarget = (enTagUnit)(m_nTag - 5);
+        
+        if(CCRANDOM_0_1()<0.2) eTarget = enTagUnitMyPos1;
+        else if(CCRANDOM_0_1()<0.4) eTarget = enTagUnitMyPos2;
+        else if(CCRANDOM_0_1()<0.6) eTarget = enTagUnitMyPos3;
+        else if(CCRANDOM_0_1()<0.8) eTarget = enTagUnitMyPos4;
+        else eTarget = enTagUnitMyPos5;
+    }
+    
+    ((UnitsLayer*)(getParent()))->OnFire(this,eTarget);
+}
 
 SEL_MenuHandler Unit::onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char * pSelectorName)
 {
@@ -127,4 +170,18 @@ bool UnitsLayer::Init()
     } while (false);
     CCLog("Function UnitsLayer::Init Error!");
     return false;
+}
+
+void UnitsLayer::OnFire(CCNode* pNode,enTagUnit eTarget)
+{
+    ((MainScene*)(getParent()))->OnFire((enTagUnit)(pNode->getTag()), eTarget);
+}
+
+void UnitsLayer::Update(float fT)
+{
+    for (int i=0; i<enTagUnitMax; i++)
+    {
+        Unit* pU = (Unit*)(getChildByTag(i));
+        pU->Update(fT);
+    }
 }

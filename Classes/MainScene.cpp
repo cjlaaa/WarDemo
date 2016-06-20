@@ -28,9 +28,28 @@ bool MainScene::init()
     BulletLayer* pBulletLayer = BulletLayer::CreateBulletLayer();
     addChild(pBulletLayer,enZOrderFront,enTagBullet);
     
+    this->schedule(schedule_selector(MainScene::Update),0.03);
+    
     return true;
 }
 
+void MainScene::Update(float fT)
+{
+    Background* pBg = (Background*)(getChildByTag(enTagBg));
+    pBg->Update(fT);
+    
+    UnitsLayer* pUnitLayer = (UnitsLayer*)(getChildByTag(enTagUnits));
+    pUnitLayer->Update(fT);
+    
+    BulletLayer* pBulletLayer = (BulletLayer*)(getChildByTag(enTagBullet));
+    pBulletLayer->Update(fT);
+}
+
+void MainScene::OnFire(enTagUnit shooter, enTagUnit target)
+{
+    BulletLayer* pBulletLayer = (BulletLayer*)(getChildByTag(enTagBullet));
+    pBulletLayer->shoot(shooter,target);
+}
 
 void MainScene::menuCloseCallback(CCObject* pSender)
 {
