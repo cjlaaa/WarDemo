@@ -30,6 +30,7 @@ bool Bullet::Init()
     {
         CCParticleSun* pP = CCParticleSun::create();
         addChild(pP);
+        pP->setTotalParticles(30);
         pP->setPosition(ccp(0,0));
         
         return true;
