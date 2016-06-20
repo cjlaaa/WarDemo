@@ -637,7 +637,7 @@
 				<key>value</key>
 				<array>
 					<string></string>
-					<string></string>
+					<string>ccbResources/troop/2/001.png</string>
 				</array>
 			</dict>
 			<dict>
@@ -722,7 +722,7 @@
 			<key>name</key>
 			<string>dead</string>
 			<key>offset</key>
-			<real>0.0</real>
+			<real>0.24019229412078857</real>
 			<key>position</key>
 			<real>1</real>
 			<key>resolution</key>

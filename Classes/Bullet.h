@@ -11,10 +11,20 @@
 
 #include "PublicDef.h"
 
+class Bullet : public CCLayer
+{
+public:
+    static Bullet* CreateBullet();
+    
+protected:
+    bool Init();
+};
+
 class BulletLayer : public CCLayer
 {
 public:
     static BulletLayer* CreateBulletLayer();
+    void Shoot(enTagUnit shooter,enTagUnit target);
     
 protected:
     bool Init();

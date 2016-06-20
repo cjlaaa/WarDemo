@@ -44,4 +44,19 @@ enum
     enZOrderFront,
 };
 
+enum enTagUnit
+{
+    enTagUnitMyPos1 = 0,
+    enTagUnitMyPos2,
+    enTagUnitMyPos3,
+    enTagUnitMyPos4,
+    enTagUnitMyPos5,
+    enTagUnitEnemyPos1,
+    enTagUnitEnemyPos2,
+    enTagUnitEnemyPos3,
+    enTagUnitEnemyPos4,
+    enTagUnitEnemyPos5,
+    enTagUnitMax,
+};
+
 #endif /* PublicDef_h */

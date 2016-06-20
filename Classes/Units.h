@@ -38,21 +38,6 @@ protected:
     CCBAnimationManager* m_animationManager;
 };
 
-enum
-{
-    enTagUnitMyPos1 = 0,
-    enTagUnitMyPos2,
-    enTagUnitMyPos3,
-    enTagUnitMyPos4,
-    enTagUnitMyPos5,
-    enTagUnitEnemyPos1,
-    enTagUnitEnemyPos2,
-    enTagUnitEnemyPos3,
-    enTagUnitEnemyPos4,
-    enTagUnitEnemyPos5,
-    enTagUnitMax,
-};
-
 class UnitsLayer : public CCLayer
 {
 public:

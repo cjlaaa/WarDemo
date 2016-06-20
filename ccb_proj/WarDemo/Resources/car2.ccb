@@ -271,6 +271,18 @@
 				<array>
 					<dict>
 						<key>name</key>
+						<string>position</string>
+						<key>type</key>
+						<string>Position</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>-1</real>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
 						<string>anchorPoint</string>
 						<key>type</key>
 						<string>Point</string>
@@ -318,8 +330,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>seqExpanded</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
@@ -372,7 +382,7 @@
 				<key>value</key>
 				<array>
 					<string></string>
-					<string></string>
+					<string>ccbResources/cars/2/ID_236_01.png</string>
 				</array>
 			</dict>
 			<dict>
