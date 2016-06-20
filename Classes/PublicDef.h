@@ -18,10 +18,23 @@ using namespace std;
 #define SCREEN_WIDTH    (CCDirector::sharedDirector()->getVisibleSize().width)
 #define SCREEN_HEIGHT   (CCDirector::sharedDirector()->getVisibleSize().height)
 
+typedef vector<CCPoint> ccpVector;
+
+class GlobalData
+{
+public:
+    static GlobalData* sharedDirector(void);
+    virtual bool init(void);
+    ccpVector getUnitPos() {return m_UnitPos;}
+private:
+    ccpVector m_UnitPos;
+};
+
 enum
 {
     enTagBg,
     enTagUnits,
+    enTagBullet,
 };
 
 enum

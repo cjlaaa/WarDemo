@@ -1,25 +1,21 @@
-#include "HelloWorldScene.h"
+#include "MainScene.h"
 #include "Background.h"
 #include "Units.h"
+#include "Bullet.h"
 USING_NS_CC;
 
-CCScene* HelloWorld::scene()
+CCScene* MainScene::scene()
 {
-    // 'scene' is an autorelease object
     CCScene *scene = CCScene::create();
     
-    // 'layer' is an autorelease object
-    HelloWorld *layer = HelloWorld::create();
+    MainScene *layer = MainScene::create();
 
-    // add layer as a child to scene
     scene->addChild(layer);
 
-    // return the scene
     return scene;
 }
 
-// on "init" you need to initialize your instance
-bool HelloWorld::init()
+bool MainScene::init()
 {
     if ( !CCLayer::init() )return false;
     
@@ -29,11 +25,14 @@ bool HelloWorld::init()
     UnitsLayer* pUnitLayer = UnitsLayer::CreateUnitsLayer();
     addChild(pUnitLayer,enZOrderMiddle,enTagUnits);
     
+    BulletLayer* pBulletLayer = BulletLayer::CreateBulletLayer();
+    addChild(pBulletLayer,enZOrderFront,enTagBullet);
+    
     return true;
 }
 
 
-void HelloWorld::menuCloseCallback(CCObject* pSender)
+void MainScene::menuCloseCallback(CCObject* pSender)
 {
     CCDirector::sharedDirector()->end();
 
