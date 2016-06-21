@@ -10,6 +10,7 @@
 		0F0CA7371D13D8870050F028 /* Units.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F0CA7351D13D8870050F028 /* Units.cpp */; };
 		0F0CA73D1D1785B30050F028 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F0CA73B1D1785B30050F028 /* Bullet.cpp */; };
 		0F0CA73F1D1790FC0050F028 /* PublicDef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F0CA73E1D1790FC0050F028 /* PublicDef.cpp */; };
+		0F0CA7421D18DD290050F028 /* dandao_00000.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F0CA7411D18DD290050F028 /* dandao_00000.png */; };
 		0F34C6CE1D13AA5D00C07573 /* Background.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F34C6CC1D13AA5D00C07573 /* Background.cpp */; };
 		0F34C6DA1D13CCA900C07573 /* ccb in Resources */ = {isa = PBXBuildFile; fileRef = 0F34C6D91D13CCA900C07573 /* ccb */; };
 		0F34C6DC1D13CD3900C07573 /* ccbResources in Resources */ = {isa = PBXBuildFile; fileRef = 0F34C6DB1D13CD3900C07573 /* ccbResources */; };
@@ -250,6 +251,7 @@
 		0F0CA73B1D1785B30050F028 /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Bullet.cpp; path = ../Classes/Bullet.cpp; sourceTree = "<group>"; };
 		0F0CA73C1D1785B30050F028 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bullet.h; path = ../Classes/Bullet.h; sourceTree = "<group>"; };
 		0F0CA73E1D1790FC0050F028 /* PublicDef.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PublicDef.cpp; path = ../Classes/PublicDef.cpp; sourceTree = "<group>"; };
+		0F0CA7411D18DD290050F028 /* dandao_00000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dandao_00000.png; sourceTree = "<group>"; };
 		0F34C6CC1D13AA5D00C07573 /* Background.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Background.cpp; path = ../Classes/Background.cpp; sourceTree = "<group>"; };
 		0F34C6CD1D13AA5D00C07573 /* Background.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Background.h; path = ../Classes/Background.h; sourceTree = "<group>"; };
 		0F34C6D91D13CCA900C07573 /* ccb */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ccb; sourceTree = "<group>"; };
@@ -1500,6 +1502,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0F0CA7411D18DD290050F028 /* dandao_00000.png */,
 				0F34C6DB1D13CD3900C07573 /* ccbResources */,
 				0F34C6D91D13CCA900C07573 /* ccb */,
 				1AFAF8B916D35E4900DB1158 /* CloseNormal.png */,
@@ -1599,6 +1602,7 @@
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
 				0F34C6DC1D13CD3900C07573 /* ccbResources in Resources */,
 				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
+				0F0CA7421D18DD290050F028 /* dandao_00000.png in Resources */,
 				1A9CE8881765A12C000E3062 /* json_internalarray.inl in Resources */,
 				1A9CE8891765A12C000E3062 /* json_internalmap.inl in Resources */,
 				1A9CE88C1765A12C000E3062 /* json_valueiterator.inl in Resources */,

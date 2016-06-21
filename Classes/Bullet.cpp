@@ -28,10 +28,16 @@ bool Bullet::Init()
 {
     do
     {
-        CCParticleSun* pP = CCParticleSun::create();
-        addChild(pP);
-        pP->setTotalParticles(30);
-        pP->setPosition(ccp(0,0));
+//        CCParticleSun* pP = CCParticleSun::create();
+//        addChild(pP);
+//        pP->setTotalParticles(30);
+//        pP->setPosition(ccp(0,0));
+//        
+//        setScale(0.3);
+        CCSprite* pB = CCSprite::create("dandao_00000.png");
+        addChild(pB);
+        pB->setRotation(-30);
+        pB->setScaleY(0.3);
         
         return true;
     } while (false);
@@ -96,7 +102,7 @@ void BulletLayer::Update(float)
 void BulletLayer::shoot(enTagUnit shooter,enTagUnit target)
 {
     ccpVector unitPos = GlobalData::sharedDirector()->getUnitPos();
-    float fBulletRunTime = 1.5;
+    float fBulletRunTime = 0.5;
     CCClippingNode * clippingNodeLeft = (CCClippingNode*)(getChildByTag(enTagClippingNodeLeft));
     CCClippingNode * clippingNodeRight = (CCClippingNode*)(getChildByTag(enTagClippingNodeRight));
     
@@ -105,8 +111,7 @@ void BulletLayer::shoot(enTagUnit shooter,enTagUnit target)
     pBulletLeft->setPosition(unitPos[shooter]);
     CCPoint ccpTarget;
     if(shooter <= enTagUnitMyPos5) ccpTarget=ccp(SCREEN_WIDTH,SCREEN_HEIGHT);
-    else ccp(0,0);
-    pBulletLeft->setScale(0.3);
+    else ccpTarget = ccp(0,0);
     pBulletLeft->runAction(CCSequence::create(CCMoveTo::create(fBulletRunTime, ccpTarget),
                                      CCCallFuncN::create(pBulletLeft, callfuncN_selector(BulletLayer::moveToTargetCallback))));
     if(shooter<=enTagUnitMyPos5)clippingNodeLeft->addChild(pBulletLeft);
@@ -115,7 +120,6 @@ void BulletLayer::shoot(enTagUnit shooter,enTagUnit target)
     
     //end
     Bullet* pBulletRight = Bullet::CreateBullet();
-    pBulletRight->setScale(0.3);
     pBulletRight->runAction(CCSequence::create(CCDelayTime::create(3.f),
                                                CCMoveTo::create(fBulletRunTime, unitPos[target]),
                                                CCCallFuncN::create(pBulletRight, callfuncN_selector(BulletLayer::moveToTargetCallback)),

@@ -153,7 +153,7 @@ bool UnitsLayer::Init()
         for (int i=enTagUnitMyPos1; i<enTagUnitMax; i++)
         {
             Unit* pUnit;
-            if(i<5)
+            if(i<enTagUnitEnemyPos1)
             {
                 pUnit = Unit::CreateUnit(CCRANDOM_0_1()>0.5?enUnitTypeCarMine:enUnitTypeTroopMine);
                 
