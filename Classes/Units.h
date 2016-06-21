@@ -19,7 +19,7 @@ enum enUnitType
     enUnitTypeTroopEnemy,
 };
 
-#define FIRE_INTERVAL 100
+#define FIRE_INTERVAL 200
 
 class Unit : public CCLayer
 , public cocos2d::extension::CCBSelectorResolver
@@ -39,6 +39,7 @@ public:
 protected:
     bool Init(enUnitType eType);
     void Fire();
+    void AnimationCallBack();
     
     CCBAnimationManager* m_animationManager;
     int m_nFireCd;

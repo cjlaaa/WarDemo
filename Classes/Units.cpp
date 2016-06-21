@@ -53,6 +53,7 @@ bool Unit::Init(enUnitType eType)
         }
         m_animationManager = ccbReader->getAnimationManager();
         m_animationManager->runAnimationsForSequenceNamed("run");
+        m_animationManager->setAnimationCompletedCallback(this, callfunc_selector(Unit::AnimationCallBack));
         ccbReader->release();
         
         addChild(ccbNode);
@@ -68,11 +69,17 @@ void Unit::Update(float fT)
     {
         m_nFireCd = FIRE_INTERVAL;
         Fire();
+        m_animationManager->runAnimationsForSequenceNamed("fire");
     }
     else
     {
         m_nFireCd -= CCRANDOM_0_1()*10;
     }
+}
+
+void Unit::AnimationCallBack()
+{
+    m_animationManager->runAnimationsForSequenceNamed("run");
 }
 
 void Unit::Fire()
