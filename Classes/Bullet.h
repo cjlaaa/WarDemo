@@ -26,6 +26,12 @@ enum
     enTagClippingNodeRight,
 };
 
+struct ShootData
+{
+    enTagUnit shooter;
+    enTagUnit target;
+};
+
 class BulletLayer : public CCLayer
 {
 public:
@@ -35,6 +41,7 @@ public:
 protected:
     bool Init();
     void moveToTargetCallback(CCNode* pObj);
+    void OnHit(CCNode* pNode,void* pData);
 };
 
 

@@ -33,7 +33,7 @@ private:
 enum
 {
     enTagBg,
-    enTagUnits,
+    enTagUnitsLayer,
     enTagBullet,
 };
 

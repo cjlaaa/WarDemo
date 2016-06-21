@@ -12,6 +12,7 @@ public:
     CREATE_FUNC(MainScene);
     
     void OnFire(enTagUnit shooter, enTagUnit target);
+    void OnHit(enTagUnit shooter, enTagUnit target);
 private:
     void Update(float);
 };

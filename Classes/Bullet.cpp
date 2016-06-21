@@ -7,6 +7,7 @@
 //
 
 #include "Bullet.h"
+#include "MainScene.h"
 
 Bullet* Bullet::CreateBullet()
 {
@@ -117,12 +118,16 @@ void BulletLayer::shoot(enTagUnit shooter,enTagUnit target)
     if(shooter<=enTagUnitMyPos5)clippingNodeLeft->addChild(pBulletLeft);
     else clippingNodeRight->addChild(pBulletLeft);
     
+    ShootData* pData = new ShootData;
+    pData->shooter = shooter;
+    pData->target = target;
     
     //end
     Bullet* pBulletRight = Bullet::CreateBullet();
     pBulletRight->runAction(CCSequence::create(CCDelayTime::create(3.f),
                                                CCMoveTo::create(fBulletRunTime, unitPos[target]),
                                                CCCallFuncN::create(pBulletRight, callfuncN_selector(BulletLayer::moveToTargetCallback)),
+                                               CCCallFuncND::create(this, callfuncND_selector(BulletLayer::OnHit),(void*)pData),
                                                NULL));
     if(shooter>=enTagUnitEnemyPos1)
     {
@@ -141,4 +146,16 @@ void BulletLayer::moveToTargetCallback(CCNode* pObj)
 {
     Bullet* pB = dynamic_cast<Bullet*>(pObj);
     pB->removeFromParent();
+}
+
+void BulletLayer::OnHit(CCNode* pNode,void* pData)
+{
+    ShootData* pShootData = (ShootData*)pData;
+    
+    MainScene* pMainScene = (MainScene*)(getParent());
+    pMainScene->OnHit(pShootData->shooter,pShootData->target);
+    
+    delete pShootData;
+    pShootData = NULL;
+//    CC_SAFE_DELETE(pShootData);
 }

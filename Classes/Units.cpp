@@ -30,6 +30,7 @@ bool Unit::Init(enUnitType eType)
     do
     {
         m_nFireCd = FIRE_INTERVAL;
+        m_eUnitType = eType;
         
         CCNodeLoaderLibrary * ccNodeLoaderLibrary = CCNodeLoaderLibrary::newDefaultCCNodeLoaderLibrary();
         CCBReader * ccbReader = new CCBReader(ccNodeLoaderLibrary);
@@ -69,7 +70,6 @@ void Unit::Update(float fT)
     {
         m_nFireCd = FIRE_INTERVAL;
         Fire();
-        m_animationManager->runAnimationsForSequenceNamed("fire");
     }
     else
     {
@@ -82,8 +82,18 @@ void Unit::AnimationCallBack()
     m_animationManager->runAnimationsForSequenceNamed("run");
 }
 
+void Unit::OnHit()
+{
+    if(m_eUnitType==enUnitTypeTroopMine ||
+       m_eUnitType==enUnitTypeTroopEnemy)
+    {
+        m_animationManager->runAnimationsForSequenceNamed("hit");
+    }
+}
+
 void Unit::Fire()
 {
+    m_animationManager->runAnimationsForSequenceNamed("fire");
     enTagUnit eTarget;
     
     if(m_nTag <= enTagUnitMyPos5)
@@ -182,6 +192,12 @@ bool UnitsLayer::Init()
 void UnitsLayer::OnFire(CCNode* pNode,enTagUnit eTarget)
 {
     ((MainScene*)(getParent()))->OnFire((enTagUnit)(pNode->getTag()), eTarget);
+}
+
+void UnitsLayer::OnHit(enTagUnit shooter, enTagUnit target)
+{
+    Unit* pU = (Unit*)getChildByTag(shooter);
+    pU->OnHit();
 }
 
 void UnitsLayer::Update(float fT)

@@ -23,7 +23,7 @@ bool MainScene::init()
     addChild(pBg,enZOrderBack,enTagBg);
     
     UnitsLayer* pUnitLayer = UnitsLayer::CreateUnitsLayer();
-    addChild(pUnitLayer,enZOrderMiddle,enTagUnits);
+    addChild(pUnitLayer,enZOrderMiddle,enTagUnitsLayer);
     
     BulletLayer* pBulletLayer = BulletLayer::CreateBulletLayer();
     addChild(pBulletLayer,enZOrderFront,enTagBullet);
@@ -38,7 +38,7 @@ void MainScene::Update(float fT)
     Background* pBg = (Background*)(getChildByTag(enTagBg));
     pBg->Update(fT);
     
-    UnitsLayer* pUnitLayer = (UnitsLayer*)(getChildByTag(enTagUnits));
+    UnitsLayer* pUnitLayer = (UnitsLayer*)(getChildByTag(enTagUnitsLayer));
     pUnitLayer->Update(fT);
     
     BulletLayer* pBulletLayer = (BulletLayer*)(getChildByTag(enTagBullet));
@@ -49,6 +49,12 @@ void MainScene::OnFire(enTagUnit shooter, enTagUnit target)
 {
     BulletLayer* pBulletLayer = (BulletLayer*)(getChildByTag(enTagBullet));
     pBulletLayer->shoot(shooter,target);
+}
+
+void MainScene::OnHit(enTagUnit shooter, enTagUnit target)
+{
+    UnitsLayer* pUnitLayer = (UnitsLayer*)(getChildByTag(enTagUnitsLayer));
+    pUnitLayer->OnHit(shooter, target);
 }
 
 void MainScene::menuCloseCallback(CCObject* pSender)

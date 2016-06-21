@@ -19,7 +19,7 @@ enum enUnitType
     enUnitTypeTroopEnemy,
 };
 
-#define FIRE_INTERVAL 200
+#define FIRE_INTERVAL 500
 
 class Unit : public CCLayer
 , public cocos2d::extension::CCBSelectorResolver
@@ -29,6 +29,7 @@ class Unit : public CCLayer
 public:
     static Unit* CreateUnit(enUnitType eType);
     void Update(float fT);
+    void OnHit();
     
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char * pSelectorName);
     virtual SEL_CCControlHandler onResolveCCBCCControlSelector(CCObject * pTarget, const char * pSelectorName);
@@ -43,6 +44,7 @@ protected:
     
     CCBAnimationManager* m_animationManager;
     int m_nFireCd;
+    enUnitType m_eUnitType;
 };
 
 class UnitsLayer : public CCLayer
@@ -52,6 +54,7 @@ public:
     void Update(float);
     
     void OnFire(CCNode* pNode,enTagUnit eTarget);
+    void OnHit(enTagUnit shooter, enTagUnit target);
 protected:
     bool Init();
 };
