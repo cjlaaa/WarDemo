@@ -81,8 +81,11 @@ void Unit::OnHit(enUnitIndex shooter)
 
     unitDataMap unitData = GlobalData::sharedDirector()->getUnitDefaultData();
     m_nHp -= unitData[GlobalData::sharedDirector()->getUnitTypeByIndex(shooter)].nDC;
-    ((UnitsLayer*)(getParent()))->OnDead(m_eUnitIndex);
-    if(m_nHp<=0) removeFromParent();
+    if(m_nHp<=0)
+    {
+        ((UnitsLayer*)(getParent()))->OnDead(m_eUnitIndex);
+        removeFromParent();
+    }
 }
 
 void Unit::Fire()
