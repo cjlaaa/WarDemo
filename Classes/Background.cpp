@@ -177,14 +177,6 @@ void Background::Update(float)
     }
 }
 
-SEL_MenuHandler Background::onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char * pSelectorName)
-{
-    
-}
-SEL_CCControlHandler Background::onResolveCCBCCControlSelector(CCObject * pTarget, const char * pSelectorName)
-{
-    
-}
 bool Background::onAssignCCBMemberVariable(CCObject * pTarget, const char * pMemberVariableName, CCNode * pNode)
 {
     if(m_backgroundLeft==NULL)
@@ -198,16 +190,3 @@ bool Background::onAssignCCBMemberVariable(CCObject * pTarget, const char * pMem
     
     return true;
 }
-bool Background::onAssignCCBCustomProperty(CCObject* pTarget, const char* pMemberVariableName, CCBValue* pCCBValue)
-{
-    
-}
-void Background::onNodeLoaded(CCNode * pNode, CCNodeLoader * pNodeLoader)
-{
-    
-}
-SEL_CallFuncN Background::onResolveCCBCCCallFuncSelector(CCObject * pTarget, const char* pSelectorName)
-{
-    
-}
-

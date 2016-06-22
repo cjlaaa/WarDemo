@@ -117,31 +117,6 @@ void Unit::Fire()
     ((UnitsLayer*)(getParent()))->OnFire(this,eTarget);
 }
 
-SEL_MenuHandler Unit::onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char * pSelectorName)
-{
-    
-}
-SEL_CCControlHandler Unit::onResolveCCBCCControlSelector(CCObject * pTarget, const char * pSelectorName)
-{
-    
-}
-bool Unit::onAssignCCBMemberVariable(CCObject * pTarget, const char * pMemberVariableName, CCNode * pNode)
-{
-    
-}
-bool Unit::onAssignCCBCustomProperty(CCObject* pTarget, const char* pMemberVariableName, CCBValue* pCCBValue)
-{
-    
-}
-void Unit::onNodeLoaded(CCNode * pNode, CCNodeLoader * pNodeLoader)
-{
-    
-}
-SEL_CallFuncN Unit::onResolveCCBCCCallFuncSelector(CCObject * pTarget, const char* pSelectorName)
-{
-    
-}
-
 UnitsLayer* UnitsLayer::CreateUnitsLayer()
 {
     do

@@ -35,13 +35,13 @@ bool GlobalData::init()
     
     //string ccbi, enUnitType type, int hp, int dc, int firecd
     m_UnitDefaultData.insert(pair<enUnitType,UnitData>(enUnitTypeCarMine,
-                                                       UnitData("ccb/car1.ccbi",enUnitTypeCarMine,5,1,300)));
+                                                       UnitData("ccb/car1.ccbi",enUnitTypeCarMine,50,1,300)));
     m_UnitDefaultData.insert(pair<enUnitType,UnitData>(enUnitTypeCarEnemy,
-                                                       UnitData("ccb/car2.ccbi",enUnitTypeCarEnemy,5,1,300)));
+                                                       UnitData("ccb/car2.ccbi",enUnitTypeCarEnemy,50,1,300)));
     m_UnitDefaultData.insert(pair<enUnitType,UnitData>(enUnitTypeTroopMine,
-                                                       UnitData("ccb/troop1.ccbi",enUnitTypeTroopMine,2,5,500)));
+                                                       UnitData("ccb/troop1.ccbi",enUnitTypeTroopMine,20,5,500)));
     m_UnitDefaultData.insert(pair<enUnitType,UnitData>(enUnitTypeTroopEnemy,
-                                                       UnitData("ccb/troop2.ccbi",enUnitTypeTroopEnemy,2,5,500)));
+                                                       UnitData("ccb/troop2.ccbi",enUnitTypeTroopEnemy,20,5,500)));
     
     
     return true;
