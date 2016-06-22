@@ -17,6 +17,7 @@
 		0F34C6DA1D13CCA900C07573 /* ccb in Resources */ = {isa = PBXBuildFile; fileRef = 0F34C6D91D13CCA900C07573 /* ccb */; };
 		0F34C6DC1D13CD3900C07573 /* ccbResources in Resources */ = {isa = PBXBuildFile; fileRef = 0F34C6DB1D13CD3900C07573 /* ccbResources */; };
 		0F633EA91D1A859900EB0468 /* UI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F633EA71D1A859900EB0468 /* UI.cpp */; };
+		0F633EB01D1A93D500EB0468 /* ui5.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F633EAF1D1A93D500EB0468 /* ui5.png */; };
 		15A3D8FF1682F7D5002FB0C5 /* b2BroadPhase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15A3D88B1682F7D5002FB0C5 /* b2BroadPhase.cpp */; };
 		15A3D9001682F7D5002FB0C5 /* b2CollideCircle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15A3D88D1682F7D5002FB0C5 /* b2CollideCircle.cpp */; };
 		15A3D9011682F7D5002FB0C5 /* b2CollideEdge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15A3D88E1682F7D5002FB0C5 /* b2CollideEdge.cpp */; };
@@ -263,6 +264,7 @@
 		0F34C6DB1D13CD3900C07573 /* ccbResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ccbResources; sourceTree = "<group>"; };
 		0F633EA71D1A859900EB0468 /* UI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UI.cpp; path = ../Classes/UI.cpp; sourceTree = "<group>"; };
 		0F633EA81D1A859900EB0468 /* UI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UI.h; path = ../Classes/UI.h; sourceTree = "<group>"; };
+		0F633EAF1D1A93D500EB0468 /* ui5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ui5.png; sourceTree = "<group>"; };
 		15A3D87E1682F7B3002FB0C5 /* cocos2dx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2dx.xcodeproj; path = ../../../cocos2dx/proj.ios/cocos2dx.xcodeproj; sourceTree = "<group>"; };
 		15A3D8891682F7D5002FB0C5 /* Box2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box2D.h; sourceTree = "<group>"; };
 		15A3D88B1682F7D5002FB0C5 /* b2BroadPhase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2BroadPhase.cpp; sourceTree = "<group>"; };
@@ -1511,6 +1513,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0F633EAF1D1A93D500EB0468 /* ui5.png */,
 				0F0CA7431D1924210050F028 /* crater1.png */,
 				0F0CA7441D1924210050F028 /* crater2.png */,
 				0F0CA7411D18DD290050F028 /* dandao_00000.png */,
@@ -1612,6 +1615,7 @@
 				15A3D9961682F7F9002FB0C5 /* CMakeLists.txt in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
+				0F633EB01D1A93D500EB0468 /* ui5.png in Resources */,
 				0F34C6DC1D13CD3900C07573 /* ccbResources in Resources */,
 				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
 				0F0CA7421D18DD290050F028 /* dandao_00000.png in Resources */,

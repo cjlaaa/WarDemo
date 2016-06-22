@@ -43,6 +43,7 @@ bool UI::Init()
         tableView->setVerticalFillOrder(kCCTableViewFillTopDown);
         this->addChild(tableView,enZOrderFront);
         tableView->reloadData();
+        tableView->setBounceable(false);
         
         return true;
     } while (false);
@@ -64,8 +65,8 @@ void UI::tableCellTouched(CCTableView* table, CCTableViewCell* cell)
 
 CCSize UI::tableCellSizeForIndex(CCTableView *table, unsigned int idx)
 {
-    CCSprite *sprite = CCSprite::create("Icon-114.png");
-    CCSize size = sprite->getContentSize();
+    CCSprite *sprite = CCSprite::create("ui5.png");
+    CCSize size = sprite->getContentSize()*1.02;
     sprite->release();
     return size;
 }
@@ -84,7 +85,7 @@ CCTableViewCell* UI::tableCellAtIndex(CCTableView *table, unsigned int idx)
     if (!cell) {
         cell = new CCTableViewCell();
         cell->autorelease();
-        CCSprite *sprite = CCSprite::create("Icon-114.png");
+        CCSprite *sprite = CCSprite::create("ui5.png");
         sprite->setAnchorPoint(CCPointZero);
         sprite->setPosition(ccp(0, 0));
         cell->addChild(sprite);
@@ -107,5 +108,5 @@ CCTableViewCell* UI::tableCellAtIndex(CCTableView *table, unsigned int idx)
 
 unsigned int UI::numberOfCellsInTableView(CCTableView *table)
 {
-    return 5;
+    return 10;
 }
