@@ -29,29 +29,15 @@ bool Unit::Init(enUnitType eType)
 {
     do
     {
-        m_nFireCd = FIRE_INTERVAL;
-        m_eUnitType = eType;
+        unitDataMap unitData = GlobalData::sharedDirector()->getUnitData();
+        m_unitData = unitData[eType];
+        
+        m_nFireCd = m_unitData.nFireCD;
+        m_eUnitType = m_unitData.eType;
         
         CCNodeLoaderLibrary * ccNodeLoaderLibrary = CCNodeLoaderLibrary::newDefaultCCNodeLoaderLibrary();
         CCBReader * ccbReader = new CCBReader(ccNodeLoaderLibrary);
-        CCNode * ccbNode;
-        switch (eType)
-        {
-            case enUnitTypeCarMine:
-                ccbNode = ccbReader->readNodeGraphFromFile("ccb/car1.ccbi", this);
-                break;
-            case enUnitTypeCarEnemy:
-                ccbNode = ccbReader->readNodeGraphFromFile("ccb/car2.ccbi", this);
-                break;
-            case enUnitTypeTroopMine:
-                ccbNode = ccbReader->readNodeGraphFromFile("ccb/troop1.ccbi", this);
-                break;
-            case enUnitTypeTroopEnemy:
-                ccbNode = ccbReader->readNodeGraphFromFile("ccb/troop2.ccbi", this);
-                break;
-            default:
-                break;
-        }
+        CCNode * ccbNode = ccbReader->readNodeGraphFromFile(m_unitData.strCCBI.c_str(), this);
         m_animationManager = ccbReader->getAnimationManager();
         m_animationManager->runAnimationsForSequenceNamed("run");
         m_animationManager->setAnimationCompletedCallback(this, callfunc_selector(Unit::AnimationCallBack));
@@ -68,7 +54,7 @@ void Unit::Update(float fT)
 {
     if(m_nFireCd<0)
     {
-        m_nFireCd = FIRE_INTERVAL;
+        m_nFireCd = m_unitData.nFireCD;
         Fire();
     }
     else
@@ -84,8 +70,8 @@ void Unit::AnimationCallBack()
 
 void Unit::OnHit()
 {
-    if(m_eUnitType==enUnitTypeTroopMine ||
-       m_eUnitType==enUnitTypeTroopEnemy)
+    if(m_unitData.eType==enUnitTypeTroopMine ||
+       m_unitData.eType==enUnitTypeTroopEnemy)
     {
         m_animationManager->runAnimationsForSequenceNamed("hit");
     }

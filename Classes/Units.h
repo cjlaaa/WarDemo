@@ -11,16 +11,6 @@
 
 #include "PublicDef.h"
 
-enum enUnitType
-{
-    enUnitTypeCarMine,
-    enUnitTypeCarEnemy,
-    enUnitTypeTroopMine,
-    enUnitTypeTroopEnemy,
-};
-
-#define FIRE_INTERVAL 500
-
 class Unit : public CCLayer
 , public cocos2d::extension::CCBSelectorResolver
 , public cocos2d::extension::CCBMemberVariableAssigner
@@ -45,6 +35,7 @@ protected:
     CCBAnimationManager* m_animationManager;
     int m_nFireCd;
     enUnitType m_eUnitType;
+    UnitData m_unitData;
 };
 
 class UnitsLayer : public CCLayer

@@ -18,23 +18,54 @@ using namespace std;
 #define SCREEN_WIDTH    (CCDirector::sharedDirector()->getVisibleSize().width)
 #define SCREEN_HEIGHT   (CCDirector::sharedDirector()->getVisibleSize().height)
 
-typedef vector<CCPoint> ccpVector;
+enum enUnitType
+{
+    enUnitTypeError = -1,
+    enUnitTypeCarMine,
+    enUnitTypeCarEnemy,
+    enUnitTypeTroopMine,
+    enUnitTypeTroopEnemy,
+};
 
+struct UnitData
+{
+    UnitData()
+    {
+        strCCBI = "";
+        eType = enUnitTypeError;
+        nHp = 0;
+        nDC = 0;
+        nFireCD = 0;
+    }
+    
+    UnitData(string ccbi, enUnitType type, int hp, int dc, int firecd)
+    {
+        strCCBI = ccbi;
+        eType = type;
+        nHp = hp;
+        nDC = dc;
+        nFireCD = firecd;
+    }
+    
+    string strCCBI;
+    enUnitType eType;
+    int nHp;
+    int nDC;
+    int nFireCD;
+};
+
+typedef vector<CCPoint> ccpVector;
+typedef map<enUnitType,UnitData> unitDataMap;
 class GlobalData
 {
 public:
     static GlobalData* sharedDirector(void);
     virtual bool init(void);
     ccpVector getUnitPos() {return m_UnitPos;}
+    unitDataMap getUnitData() {return m_UnitData;}
 private:
     ccpVector m_UnitPos;
-};
-
-enum
-{
-    enTagBg,
-    enTagUnitsLayer,
-    enTagBullet,
+    unitDataMap m_UnitData;
 };
 
 enum

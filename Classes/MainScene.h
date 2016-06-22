@@ -3,6 +3,13 @@
 
 #include "PublicDef.h"
 
+enum
+{
+    enTagBg,
+    enTagUnitsLayer,
+    enTagBullet,
+};
+
 class MainScene : public cocos2d::CCLayer
 {
 public:
