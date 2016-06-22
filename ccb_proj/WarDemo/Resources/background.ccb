@@ -15,7 +15,7 @@
 	<key>guides</key>
 	<array/>
 	<key>jsControlled</key>
-	<true/>
+	<false/>
 	<key>nodeGraph</key>
 	<dict>
 		<key>baseClass</key>
@@ -857,8 +857,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>
@@ -1154,9 +1152,9 @@
 				<key>displayName</key>
 				<string>bg</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>background</string>
 				<key>memberVarAssignmentType</key>
-				<integer>0</integer>
+				<integer>2</integer>
 				<key>properties</key>
 				<array>
 					<dict>
@@ -1171,8 +1169,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>-907.2257080078125</real>
-							<real>-382.9205322265625</real>
+							<real>2047.9892578125</real>
+							<real>1018.6494140625</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -1231,6 +1229,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>
@@ -1427,9 +1427,9 @@
 			<key>name</key>
 			<string>left</string>
 			<key>offset</key>
-			<real>5.28125</real>
+			<real>0.0</real>
 			<key>position</key>
-			<real>20</real>
+			<real>0.0</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>

@@ -55,6 +55,9 @@ void MainScene::OnHit(enTagUnit shooter, enTagUnit target)
 {
     UnitsLayer* pUnitLayer = (UnitsLayer*)(getChildByTag(enTagUnitsLayer));
     pUnitLayer->OnHit(shooter, target);
+    
+    Background* pBg = (Background*)(getChildByTag(enTagBg));
+    pBg->OnHit(target);
 }
 
 void MainScene::menuCloseCallback(CCObject* pSender)

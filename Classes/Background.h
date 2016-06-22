@@ -11,6 +11,12 @@
 
 #include "PublicDef.h"
 
+enum
+{
+    enTagBgLeft,
+    enTagBgRight,
+};
+
 class Background : public CCLayer
 , public cocos2d::extension::CCBSelectorResolver
 , public cocos2d::extension::CCBMemberVariableAssigner
@@ -27,11 +33,16 @@ public:
     virtual SEL_CallFuncN onResolveCCBCCCallFuncSelector(CCObject * pTarget, const char* pSelectorName);
     
     void Update(float);
-    
+    void OnHit(enTagUnit target);
 protected:
     bool Init();
-    
-//    CCBAnimationManager* m_animationManager;
+    CCSprite* m_backgroundLeft;
+    CCSprite* m_backgroundRight;
+    void onExit();
+    CCArray* m_CraterArrayLeft;
+    CCArray* m_CraterArrayRight;
+    CCArray* m_CraterArrayLeftDeleted;
+    CCArray* m_CraterArrayRightDeleted;
 };
 
 #endif /* ListNode_hpp */

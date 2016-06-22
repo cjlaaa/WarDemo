@@ -44,7 +44,7 @@ bool Background::Init()
         
         CCClippingNode * clippingNodeLeft = CCClippingNode::create();
         addChild(clippingNodeLeft);
-        clippingNodeLeft->addChild(bgLeft);
+        clippingNodeLeft->addChild(bgLeft,enZOrderBack,enTagBgLeft);
         CCDrawNode *shapeLeft = CCDrawNode::create();
         static CCPoint triangleLeft[3];
         triangleLeft[0] = ccp(0, 0);
@@ -57,7 +57,7 @@ bool Background::Init()
         
         CCClippingNode * clippingNodeRight = CCClippingNode::create();
         addChild(clippingNodeRight);
-        clippingNodeRight->addChild(bgRight);
+        clippingNodeRight->addChild(bgRight,enZOrderBack,enTagBgRight);
         CCDrawNode *shapeRight = CCDrawNode::create();
         static CCPoint triangleRight[3];
         triangleRight[0] = ccp(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -68,15 +68,82 @@ bool Background::Init()
         clippingNodeRight->setStencil(shapeRight);
         clippingNodeRight->setInverted(false);
         
+        m_CraterArrayLeft = CCArray::create();
+        m_CraterArrayLeft->retain();
+        m_CraterArrayRight = CCArray::create();
+        m_CraterArrayRight->retain();
+        m_CraterArrayLeftDeleted = CCArray::create();
+        m_CraterArrayLeftDeleted->retain();
+        m_CraterArrayRightDeleted = CCArray::create();
+        m_CraterArrayRightDeleted->retain();
+        
+        
         return true;
     } while (false);
     CCLog("Function Background::Init Error!");
     return false;
 }
 
+void Background::onExit()
+{
+    CCLayer::onExit();
+    m_CraterArrayLeft->release();
+    m_CraterArrayRight->release();
+    m_CraterArrayLeftDeleted->release();
+    m_CraterArrayRightDeleted->release();
+}
+
+void Background::OnHit(enTagUnit target)
+{
+    ccpVector unitsPos = GlobalData::sharedDirector()->getUnitPos();
+    
+    CCSprite* pCrater = CCSprite::create("crater1.png");
+    if(target<enTagUnitEnemyPos1)
+    {
+        m_backgroundLeft->addChild(pCrater);
+        pCrater->setPosition(m_backgroundLeft->convertToNodeSpace(unitsPos[target]));
+        m_CraterArrayLeft->addObject(pCrater);
+    }
+    else
+    {
+        m_backgroundRight->addChild(pCrater);
+        pCrater->setPosition(m_backgroundRight->convertToNodeSpace(unitsPos[target]));
+        m_CraterArrayRight->addObject(pCrater);
+    }
+    
+}
+
 void Background::Update(float)
 {
+    m_CraterArrayLeft->removeObjectsInArray(m_CraterArrayLeftDeleted);
+    m_CraterArrayLeftDeleted->removeAllObjects();
+    CCObject* pObjLeft = NULL;
+    CCARRAY_FOREACH(m_CraterArrayLeft,pObjLeft)
+    {
+        CCSprite* pCrater = (CCSprite*)(pObjLeft);
+        CCPoint p = pCrater->getPosition();
+        CCPoint point = m_backgroundLeft->convertToWorldSpace(p);
+        if(point.x < 0 || point.y < 0 || point.x > SCREEN_WIDTH || point.y > SCREEN_HEIGHT)
+        {
+            m_CraterArrayLeftDeleted->addObject(pCrater);
+            m_backgroundLeft->removeChild(pCrater,true);
+        }
+    }
     
+    m_CraterArrayRight->removeObjectsInArray(m_CraterArrayRightDeleted);
+    m_CraterArrayRightDeleted->removeAllObjects();
+    CCObject* pObjRight = NULL;
+    CCARRAY_FOREACH(m_CraterArrayRight,pObjRight)
+    {
+        CCSprite* pCrater = (CCSprite*)(pObjRight);
+        CCPoint p = pCrater->getPosition();
+        CCPoint point = m_backgroundRight->convertToWorldSpace(p);
+        if(point.x < 0 || point.y < 0 || point.x > SCREEN_WIDTH || point.y > SCREEN_HEIGHT)
+        {
+            m_CraterArrayRightDeleted->addObject(pCrater);
+            m_backgroundRight->removeChild(pCrater,true);
+        }
+    }
 }
 
 SEL_MenuHandler Background::onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char * pSelectorName)
@@ -89,7 +156,16 @@ SEL_CCControlHandler Background::onResolveCCBCCControlSelector(CCObject * pTarge
 }
 bool Background::onAssignCCBMemberVariable(CCObject * pTarget, const char * pMemberVariableName, CCNode * pNode)
 {
+    if(m_backgroundLeft==NULL)
+    {
+        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "background", CCSprite*, m_backgroundLeft);
+    }
+    else
+    {
+        CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "background", CCSprite*, m_backgroundRight);
+    }
     
+    return true;
 }
 bool Background::onAssignCCBCustomProperty(CCObject* pTarget, const char* pMemberVariableName, CCBValue* pCCBValue)
 {
