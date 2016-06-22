@@ -18,8 +18,9 @@ public:
     void menuCloseCallback(CCObject* pSender);
     CREATE_FUNC(MainScene);
     
-    void OnFire(enTagUnit shooter, enTagUnit target);
-    void OnHit(enTagUnit shooter, enTagUnit target);
+    void OnFire(enUnitIndex shooter, enUnitIndex target);
+    void OnHit(enUnitIndex shooter, enUnitIndex target);
+    void OnDead(enUnitIndex target);
 private:
     void Update(float);
 };

@@ -33,10 +33,10 @@ bool GlobalData::init()
     m_UnitPos.push_back(ccp(SCREEN_WIDTH*0.8,SCREEN_HEIGHT*0.55));
     m_UnitPos.push_back(ccp(SCREEN_WIDTH*0.85,SCREEN_HEIGHT*0.4));
     
-    m_UnitData.insert(pair<enUnitType,UnitData>(enUnitTypeCarMine, UnitData("ccb/car1.ccbi",enUnitTypeCarMine,10,1,300)));
-    m_UnitData.insert(pair<enUnitType,UnitData>(enUnitTypeCarEnemy, UnitData("ccb/car2.ccbi",enUnitTypeCarEnemy,10,1,300)));
-    m_UnitData.insert(pair<enUnitType,UnitData>(enUnitTypeTroopMine, UnitData("ccb/troop1.ccbi",enUnitTypeTroopMine,20,5,500)));
-    m_UnitData.insert(pair<enUnitType,UnitData>(enUnitTypeTroopEnemy, UnitData("ccb/troop2.ccbi",enUnitTypeTroopEnemy,20,5,500)));
+    m_UnitDefaultData.insert(pair<enUnitType,UnitData>(enUnitTypeCarMine, UnitData("ccb/car1.ccbi",enUnitTypeCarMine,15,1,300)));
+    m_UnitDefaultData.insert(pair<enUnitType,UnitData>(enUnitTypeCarEnemy, UnitData("ccb/car2.ccbi",enUnitTypeCarEnemy,15,1,300)));
+    m_UnitDefaultData.insert(pair<enUnitType,UnitData>(enUnitTypeTroopMine, UnitData("ccb/troop1.ccbi",enUnitTypeTroopMine,10,5,500)));
+    m_UnitDefaultData.insert(pair<enUnitType,UnitData>(enUnitTypeTroopEnemy, UnitData("ccb/troop2.ccbi",enUnitTypeTroopEnemy,10,5,500)));
     
     
     return true;

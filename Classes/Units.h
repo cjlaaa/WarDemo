@@ -11,6 +11,12 @@
 
 #include "PublicDef.h"
 
+enum enUnitStatus
+{
+    enUnitStatusIdle,
+    enUnitStatusDead,
+};
+
 class Unit : public CCLayer
 , public cocos2d::extension::CCBSelectorResolver
 , public cocos2d::extension::CCBMemberVariableAssigner
@@ -19,7 +25,7 @@ class Unit : public CCLayer
 public:
     static Unit* CreateUnit(enUnitType eType);
     void Update(float fT);
-    void OnHit();
+    void OnHit(enUnitIndex shooter);
     
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char * pSelectorName);
     virtual SEL_CCControlHandler onResolveCCBCCControlSelector(CCObject * pTarget, const char * pSelectorName);
@@ -34,6 +40,8 @@ protected:
     
     CCBAnimationManager* m_animationManager;
     int m_nFireCd;
+    int m_nHp;
+    enUnitStatus m_eUnitStatus;
     enUnitType m_eUnitType;
     UnitData m_unitData;
 };
@@ -44,8 +52,8 @@ public:
     static UnitsLayer* CreateUnitsLayer();
     void Update(float);
     
-    void OnFire(CCNode* pNode,enTagUnit eTarget);
-    void OnHit(enTagUnit shooter, enTagUnit target);
+    void OnFire(CCNode* pNode,enUnitIndex eTarget);
+    void OnHit(enUnitIndex shooter, enUnitIndex target);
 protected:
     bool Init();
 };

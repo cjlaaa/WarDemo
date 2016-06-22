@@ -27,6 +27,22 @@ enum enUnitType
     enUnitTypeTroopEnemy,
 };
 
+enum enUnitIndex
+{
+    enUnitIndexError,
+    enUnitIndexMy1 = 0,
+    enUnitIndexMy2,
+    enUnitIndexMy3,
+    enUnitIndexMy4,
+    enUnitIndexMy5,
+    enUnitIndexEnemy1,
+    enUnitIndexEnemy2,
+    enUnitIndexEnemy3,
+    enUnitIndexEnemy4,
+    enUnitIndexEnemy5,
+    enUnitIndexMax,
+};
+
 struct UnitData
 {
     UnitData()
@@ -56,16 +72,20 @@ struct UnitData
 
 typedef vector<CCPoint> ccpVector;
 typedef map<enUnitType,UnitData> unitDataMap;
+typedef vector<enUnitType> unitTypeVector;
 class GlobalData
 {
 public:
     static GlobalData* sharedDirector(void);
     virtual bool init(void);
     ccpVector getUnitPos() {return m_UnitPos;}
-    unitDataMap getUnitData() {return m_UnitData;}
+    unitDataMap getUnitDefaultData() {return m_UnitDefaultData;}
+    unitTypeVector getUnitType() {return m_UnitType;}
+    void setUnitType(unitTypeVector unitType) {m_UnitType = unitType;};
 private:
+    unitTypeVector m_UnitType;
     ccpVector m_UnitPos;
-    unitDataMap m_UnitData;
+    unitDataMap m_UnitDefaultData;
 };
 
 enum
@@ -75,25 +95,10 @@ enum
     enZOrderFront,
 };
 
-enum enTagUnit
-{
-    enTagUnitMyPos1 = 0,
-    enTagUnitMyPos2,
-    enTagUnitMyPos3,
-    enTagUnitMyPos4,
-    enTagUnitMyPos5,
-    enTagUnitEnemyPos1,
-    enTagUnitEnemyPos2,
-    enTagUnitEnemyPos3,
-    enTagUnitEnemyPos4,
-    enTagUnitEnemyPos5,
-    enTagUnitMax,
-};
-
 struct FireMsg
 {
-    enTagUnit shooter;
-    enTagUnit target;
+    enUnitIndex shooter;
+    enUnitIndex target;
 };
 
 #endif /* PublicDef_h */

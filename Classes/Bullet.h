@@ -28,15 +28,15 @@ enum
 
 struct ShootData
 {
-    enTagUnit shooter;
-    enTagUnit target;
+    enUnitIndex shooter;
+    enUnitIndex target;
 };
 
 class BulletLayer : public CCLayer
 {
 public:
     static BulletLayer* CreateBulletLayer();
-    void shoot(enTagUnit shooter,enTagUnit target);
+    void shoot(enUnitIndex shooter,enUnitIndex target);
     void Update(float);
 protected:
     bool Init();

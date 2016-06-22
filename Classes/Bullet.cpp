@@ -100,7 +100,7 @@ void BulletLayer::Update(float)
     
 }
 
-void BulletLayer::shoot(enTagUnit shooter,enTagUnit target)
+void BulletLayer::shoot(enUnitIndex shooter,enUnitIndex target)
 {
     ccpVector unitPos = GlobalData::sharedDirector()->getUnitPos();
     float fBulletRunTime = 0.5;
@@ -111,11 +111,11 @@ void BulletLayer::shoot(enTagUnit shooter,enTagUnit target)
     Bullet* pBulletLeft = Bullet::CreateBullet();
     pBulletLeft->setPosition(unitPos[shooter]);
     CCPoint ccpTarget;
-    if(shooter <= enTagUnitMyPos5) ccpTarget=ccp(SCREEN_WIDTH,SCREEN_HEIGHT);
+    if(shooter <= enUnitIndexMy5) ccpTarget=ccp(SCREEN_WIDTH,SCREEN_HEIGHT);
     else ccpTarget = ccp(0,0);
     pBulletLeft->runAction(CCSequence::create(CCMoveTo::create(fBulletRunTime, ccpTarget),
                                      CCCallFuncN::create(pBulletLeft, callfuncN_selector(BulletLayer::moveToTargetCallback))));
-    if(shooter<=enTagUnitMyPos5)clippingNodeLeft->addChild(pBulletLeft);
+    if(shooter<=enUnitIndexMy5)clippingNodeLeft->addChild(pBulletLeft);
     else clippingNodeRight->addChild(pBulletLeft);
     
     ShootData* pData = new ShootData;
@@ -129,7 +129,7 @@ void BulletLayer::shoot(enTagUnit shooter,enTagUnit target)
                                                CCCallFuncN::create(pBulletRight, callfuncN_selector(BulletLayer::moveToTargetCallback)),
                                                CCCallFuncND::create(this, callfuncND_selector(BulletLayer::OnHit),(void*)pData),
                                                NULL));
-    if(shooter>=enTagUnitEnemyPos1)
+    if(shooter>=enUnitIndexEnemy1)
     {
         pBulletRight->setPosition(ccp(SCREEN_WIDTH,SCREEN_HEIGHT));
         clippingNodeLeft->addChild(pBulletRight);

@@ -45,19 +45,25 @@ void MainScene::Update(float fT)
     pBulletLayer->Update(fT);
 }
 
-void MainScene::OnFire(enTagUnit shooter, enTagUnit target)
+void MainScene::OnFire(enUnitIndex shooter, enUnitIndex target)
 {
     BulletLayer* pBulletLayer = (BulletLayer*)(getChildByTag(enTagBullet));
     pBulletLayer->shoot(shooter,target);
 }
 
-void MainScene::OnHit(enTagUnit shooter, enTagUnit target)
+void MainScene::OnHit(enUnitIndex shooter, enUnitIndex target)
 {
     UnitsLayer* pUnitLayer = (UnitsLayer*)(getChildByTag(enTagUnitsLayer));
     pUnitLayer->OnHit(shooter, target);
     
     Background* pBg = (Background*)(getChildByTag(enTagBg));
     pBg->OnHit(target);
+}
+
+void MainScene::OnDead(enUnitIndex target)
+{
+    Background* pBg = (Background*)(getChildByTag(enTagBg));
+    pBg->OnDead(target);
 }
 
 void MainScene::menuCloseCallback(CCObject* pSender)

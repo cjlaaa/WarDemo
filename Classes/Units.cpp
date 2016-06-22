@@ -29,11 +29,13 @@ bool Unit::Init(enUnitType eType)
 {
     do
     {
-        unitDataMap unitData = GlobalData::sharedDirector()->getUnitData();
+        unitDataMap unitData = GlobalData::sharedDirector()->getUnitDefaultData();
         m_unitData = unitData[eType];
         
         m_nFireCd = m_unitData.nFireCD;
         m_eUnitType = m_unitData.eType;
+        m_eUnitStatus = enUnitStatusIdle;
+        m_nHp = m_unitData.nHp;
         
         CCNodeLoaderLibrary * ccNodeLoaderLibrary = CCNodeLoaderLibrary::newDefaultCCNodeLoaderLibrary();
         CCBReader * ccbReader = new CCBReader(ccNodeLoaderLibrary);
@@ -68,39 +70,44 @@ void Unit::AnimationCallBack()
     m_animationManager->runAnimationsForSequenceNamed("run");
 }
 
-void Unit::OnHit()
+void Unit::OnHit(enUnitIndex shooter)
 {
     if(m_unitData.eType==enUnitTypeTroopMine ||
        m_unitData.eType==enUnitTypeTroopEnemy)
     {
         m_animationManager->runAnimationsForSequenceNamed("hit");
     }
+    
+    unitTypeVector vecUnitType = GlobalData::sharedDirector()->getUnitType();
+    unitDataMap unitData = GlobalData::sharedDirector()->getUnitDefaultData();
+    m_nHp -= unitData[vecUnitType[shooter]].nDC;
+    if(m_nHp<=0) removeFromParent();
 }
 
 void Unit::Fire()
 {
     m_animationManager->runAnimationsForSequenceNamed("fire");
-    enTagUnit eTarget;
+    enUnitIndex eTarget;
     
-    if(m_nTag <= enTagUnitMyPos5)
+    if(m_nTag <= enUnitIndexMy5)
     {
 //        eTarget = (enTagUnit)(m_nTag + 5);
         
-        if(CCRANDOM_0_1()<0.2) eTarget = enTagUnitEnemyPos1;
-        else if(CCRANDOM_0_1()<0.4) eTarget = enTagUnitEnemyPos2;
-        else if(CCRANDOM_0_1()<0.6) eTarget = enTagUnitEnemyPos3;
-        else if(CCRANDOM_0_1()<0.8) eTarget = enTagUnitEnemyPos4;
-        else eTarget = enTagUnitEnemyPos5;
+        if(CCRANDOM_0_1()<0.2) eTarget = enUnitIndexEnemy1;
+        else if(CCRANDOM_0_1()<0.4) eTarget = enUnitIndexEnemy2;
+        else if(CCRANDOM_0_1()<0.6) eTarget = enUnitIndexEnemy3;
+        else if(CCRANDOM_0_1()<0.8) eTarget = enUnitIndexEnemy4;
+        else eTarget = enUnitIndexEnemy5;
     }
     else
     {
 //        eTarget = (enTagUnit)(m_nTag - 5);
         
-        if(CCRANDOM_0_1()<0.2) eTarget = enTagUnitMyPos1;
-        else if(CCRANDOM_0_1()<0.4) eTarget = enTagUnitMyPos2;
-        else if(CCRANDOM_0_1()<0.6) eTarget = enTagUnitMyPos3;
-        else if(CCRANDOM_0_1()<0.8) eTarget = enTagUnitMyPos4;
-        else eTarget = enTagUnitMyPos5;
+        if(CCRANDOM_0_1()<0.2) eTarget = enUnitIndexMy1;
+        else if(CCRANDOM_0_1()<0.4) eTarget = enUnitIndexMy2;
+        else if(CCRANDOM_0_1()<0.6) eTarget = enUnitIndexMy3;
+        else if(CCRANDOM_0_1()<0.8) eTarget = enUnitIndexMy4;
+        else eTarget = enUnitIndexMy5;
     }
     
     ((UnitsLayer*)(getParent()))->OnFire(this,eTarget);
@@ -152,45 +159,52 @@ bool UnitsLayer::Init()
     do
     {
         ccpVector unitsPos = GlobalData::sharedDirector()->getUnitPos();
+        unitTypeVector vecUnitType;
         
-        for (int i=enTagUnitMyPos1; i<enTagUnitMax; i++)
+        for (int i=enUnitIndexMy1; i<enUnitIndexMax; i++)
         {
-            Unit* pUnit;
-            if(i<enTagUnitEnemyPos1)
+            
+            if(i<enUnitIndexEnemy1)
             {
-                pUnit = Unit::CreateUnit(CCRANDOM_0_1()>0.5?enUnitTypeCarMine:enUnitTypeTroopMine);
-                
+                enUnitType eUnitType = CCRANDOM_0_1()>0.5?enUnitTypeCarMine:enUnitTypeTroopMine;
+                Unit* pUnit = Unit::CreateUnit(eUnitType);
+                vecUnitType.push_back(eUnitType);
+                pUnit->setPosition(unitsPos[i]);
+                addChild(pUnit,enZOrderFront,enUnitIndexMy1+i);
             }
             else
             {
-                pUnit = Unit::CreateUnit(CCRANDOM_0_1()>0.5?enUnitTypeCarEnemy:enUnitTypeTroopEnemy);
+                enUnitType eUnitType = CCRANDOM_0_1()>0.5?enUnitTypeCarEnemy:enUnitTypeTroopEnemy;
+                Unit* pUnit = Unit::CreateUnit(eUnitType);
+                vecUnitType.push_back(eUnitType);
+                pUnit->setPosition(unitsPos[i]);
+                addChild(pUnit,enZOrderFront,enUnitIndexMy1+i);
             }
-            pUnit->setPosition(unitsPos[i]);
-            addChild(pUnit,enZOrderFront,enTagUnitMyPos1+i);
         }
-
+        
+        GlobalData::sharedDirector()->setUnitType(vecUnitType);
         return true;
     } while (false);
     CCLog("Function UnitsLayer::Init Error!");
     return false;
 }
 
-void UnitsLayer::OnFire(CCNode* pNode,enTagUnit eTarget)
+void UnitsLayer::OnFire(CCNode* pNode,enUnitIndex eTarget)
 {
-    ((MainScene*)(getParent()))->OnFire((enTagUnit)(pNode->getTag()), eTarget);
+    ((MainScene*)(getParent()))->OnFire((enUnitIndex)(pNode->getTag()), eTarget);
 }
 
-void UnitsLayer::OnHit(enTagUnit shooter, enTagUnit target)
+void UnitsLayer::OnHit(enUnitIndex shooter, enUnitIndex target)
 {
     Unit* pU = (Unit*)getChildByTag(shooter);
-    pU->OnHit();
+    if(pU!=NULL)pU->OnHit(shooter);
 }
 
 void UnitsLayer::Update(float fT)
 {
-    for (int i=0; i<enTagUnitMax; i++)
+    for (int i=0; i<enUnitIndexMax; i++)
     {
         Unit* pU = (Unit*)(getChildByTag(i));
-        pU->Update(fT);
+        if(pU!=NULL)pU->Update(fT);
     }
 }

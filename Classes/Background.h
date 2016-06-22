@@ -33,7 +33,8 @@ public:
     virtual SEL_CallFuncN onResolveCCBCCCallFuncSelector(CCObject * pTarget, const char* pSelectorName);
     
     void Update(float);
-    void OnHit(enTagUnit target);
+    void OnHit(enUnitIndex target);
+    void OnDead(enUnitIndex target);
 protected:
     bool Init();
     CCSprite* m_backgroundLeft;

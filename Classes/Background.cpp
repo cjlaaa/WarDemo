@@ -93,12 +93,12 @@ void Background::onExit()
     m_CraterArrayRightDeleted->release();
 }
 
-void Background::OnHit(enTagUnit target)
+void Background::OnHit(enUnitIndex target)
 {
     ccpVector unitsPos = GlobalData::sharedDirector()->getUnitPos();
     
     CCSprite* pCrater = CCSprite::create("crater1.png");
-    if(target<enTagUnitEnemyPos1)
+    if(target<enUnitIndexEnemy1)
     {
         m_backgroundLeft->addChild(pCrater);
         pCrater->setPosition(m_backgroundLeft->convertToNodeSpace(unitsPos[target]));
@@ -110,7 +110,18 @@ void Background::OnHit(enTagUnit target)
         pCrater->setPosition(m_backgroundRight->convertToNodeSpace(unitsPos[target]));
         m_CraterArrayRight->addObject(pCrater);
     }
+}
+
+void Background::OnDead(enUnitIndex target)
+{
+    ccpVector unitsPos = GlobalData::sharedDirector()->getUnitPos();
     
+    CCNodeLoaderLibrary * ccNodeLoaderLibraryRight = CCNodeLoaderLibrary::newDefaultCCNodeLoaderLibrary();
+    CCBReader * ccbReaderRight = new CCBReader(ccNodeLoaderLibraryRight);
+    CCNode * bgRight = ccbReaderRight->readNodeGraphFromFile("ccb/background.ccbi", this);
+    CCBAnimationManager* animationManagerRight = ccbReaderRight->getAnimationManager();
+    animationManagerRight->runAnimationsForSequenceNamed("right");
+    ccbReaderRight->release();
 }
 
 void Background::Update(float)
