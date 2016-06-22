@@ -29,12 +29,6 @@ bool Bullet::Init()
 {
     do
     {
-//        CCParticleSun* pP = CCParticleSun::create();
-//        addChild(pP);
-//        pP->setTotalParticles(30);
-//        pP->setPosition(ccp(0,0));
-//        
-//        setScale(0.3);
         CCSprite* pB = CCSprite::create("dandao_00000.png");
         addChild(pB);
         pB->setRotation(-30);

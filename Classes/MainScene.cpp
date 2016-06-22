@@ -2,6 +2,7 @@
 #include "Background.h"
 #include "Units.h"
 #include "Bullet.h"
+#include "UI.h"
 USING_NS_CC;
 
 CCScene* MainScene::scene()
@@ -27,6 +28,9 @@ bool MainScene::init()
     
     BulletLayer* pBulletLayer = BulletLayer::CreateBulletLayer();
     addChild(pBulletLayer,enZOrderFront,enTagBullet);
+    
+    UI* ui = UI::CreateUI();
+    addChild(ui,enZOrderFront,enTagUI);
     
     this->schedule(schedule_selector(MainScene::Update),0.03);
     

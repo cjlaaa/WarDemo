@@ -8,6 +8,7 @@ enum
     enTagBg,
     enTagUnitsLayer,
     enTagBullet,
+    enTagUI,
 };
 
 class MainScene : public cocos2d::CCLayer

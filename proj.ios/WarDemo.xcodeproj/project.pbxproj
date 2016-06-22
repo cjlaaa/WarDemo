@@ -16,6 +16,7 @@
 		0F34C6CE1D13AA5D00C07573 /* Background.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F34C6CC1D13AA5D00C07573 /* Background.cpp */; };
 		0F34C6DA1D13CCA900C07573 /* ccb in Resources */ = {isa = PBXBuildFile; fileRef = 0F34C6D91D13CCA900C07573 /* ccb */; };
 		0F34C6DC1D13CD3900C07573 /* ccbResources in Resources */ = {isa = PBXBuildFile; fileRef = 0F34C6DB1D13CD3900C07573 /* ccbResources */; };
+		0F633EA91D1A859900EB0468 /* UI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F633EA71D1A859900EB0468 /* UI.cpp */; };
 		15A3D8FF1682F7D5002FB0C5 /* b2BroadPhase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15A3D88B1682F7D5002FB0C5 /* b2BroadPhase.cpp */; };
 		15A3D9001682F7D5002FB0C5 /* b2CollideCircle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15A3D88D1682F7D5002FB0C5 /* b2CollideCircle.cpp */; };
 		15A3D9011682F7D5002FB0C5 /* b2CollideEdge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15A3D88E1682F7D5002FB0C5 /* b2CollideEdge.cpp */; };
@@ -260,6 +261,8 @@
 		0F34C6CD1D13AA5D00C07573 /* Background.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Background.h; path = ../Classes/Background.h; sourceTree = "<group>"; };
 		0F34C6D91D13CCA900C07573 /* ccb */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ccb; sourceTree = "<group>"; };
 		0F34C6DB1D13CD3900C07573 /* ccbResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ccbResources; sourceTree = "<group>"; };
+		0F633EA71D1A859900EB0468 /* UI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UI.cpp; path = ../Classes/UI.cpp; sourceTree = "<group>"; };
+		0F633EA81D1A859900EB0468 /* UI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UI.h; path = ../Classes/UI.h; sourceTree = "<group>"; };
 		15A3D87E1682F7B3002FB0C5 /* cocos2dx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2dx.xcodeproj; path = ../../../cocos2dx/proj.ios/cocos2dx.xcodeproj; sourceTree = "<group>"; };
 		15A3D8891682F7D5002FB0C5 /* Box2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box2D.h; sourceTree = "<group>"; };
 		15A3D88B1682F7D5002FB0C5 /* b2BroadPhase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2BroadPhase.cpp; sourceTree = "<group>"; };
@@ -1209,6 +1212,8 @@
 				0F0CA73E1D1790FC0050F028 /* PublicDef.cpp */,
 				0F0CA73B1D1785B30050F028 /* Bullet.cpp */,
 				0F0CA73C1D1785B30050F028 /* Bullet.h */,
+				0F633EA71D1A859900EB0468 /* UI.cpp */,
+				0F633EA81D1A859900EB0468 /* UI.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -1702,6 +1707,7 @@
 				15A3D9B11682F7F9002FB0C5 /* cpSweep1D.c in Sources */,
 				15A3D9B21682F7F9002FB0C5 /* cpVect.c in Sources */,
 				15A3DA311682F826002FB0C5 /* CCBAnimationManager.cpp in Sources */,
+				0F633EA91D1A859900EB0468 /* UI.cpp in Sources */,
 				15A3DA321682F826002FB0C5 /* CCBFileLoader.cpp in Sources */,
 				15A3DA331682F826002FB0C5 /* CCBKeyframe.cpp in Sources */,
 				15A3DA341682F826002FB0C5 /* CCBReader.cpp in Sources */,
