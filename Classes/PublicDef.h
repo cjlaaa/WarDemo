@@ -72,7 +72,7 @@ struct UnitData
 
 typedef vector<CCPoint> ccpVector;
 typedef map<enUnitType,UnitData> unitDataMap;
-typedef vector<enUnitType> unitTypeVector;
+typedef map<enUnitIndex,enUnitType> unitTypeMap;
 class GlobalData
 {
 public:
@@ -80,10 +80,11 @@ public:
     virtual bool init(void);
     ccpVector getUnitPos() {return m_UnitPos;}
     unitDataMap getUnitDefaultData() {return m_UnitDefaultData;}
-    unitTypeVector getUnitType() {return m_UnitType;}
-    void setUnitType(unitTypeVector unitType) {m_UnitType = unitType;};
+    unitTypeMap getUnitType() {return m_UnitType;}
+    void setUnitType(unitTypeMap unitType) {m_UnitType = unitType;};
+    enUnitType getUnitTypeByIndex(enUnitIndex eIndex) {return m_UnitType[eIndex];}
 private:
-    unitTypeVector m_UnitType;
+    unitTypeMap m_UnitType;
     ccpVector m_UnitPos;
     unitDataMap m_UnitDefaultData;
 };

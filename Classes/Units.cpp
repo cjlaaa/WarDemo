@@ -9,12 +9,12 @@
 #include "Units.h"
 #include "MainScene.h"
 
-Unit* Unit::CreateUnit(enUnitType eType)
+Unit* Unit::CreateUnit(enUnitType eType,enUnitIndex eIndex)
 {
     do
     {
         Unit* pRet = new Unit;
-        if (pRet && pRet->Init(eType))
+        if (pRet && pRet->Init(eType,eIndex))
         {
             pRet->autorelease();
             return pRet;
@@ -25,7 +25,7 @@ Unit* Unit::CreateUnit(enUnitType eType)
     return NULL;
 }
 
-bool Unit::Init(enUnitType eType)
+bool Unit::Init(enUnitType eType,enUnitIndex eIndex)
 {
     do
     {
@@ -36,6 +36,7 @@ bool Unit::Init(enUnitType eType)
         m_eUnitType = m_unitData.eType;
         m_eUnitStatus = enUnitStatusIdle;
         m_nHp = m_unitData.nHp;
+        m_eUnitIndex = eIndex;
         
         CCNodeLoaderLibrary * ccNodeLoaderLibrary = CCNodeLoaderLibrary::newDefaultCCNodeLoaderLibrary();
         CCBReader * ccbReader = new CCBReader(ccNodeLoaderLibrary);
@@ -77,10 +78,10 @@ void Unit::OnHit(enUnitIndex shooter)
     {
         m_animationManager->runAnimationsForSequenceNamed("hit");
     }
-    
-    unitTypeVector vecUnitType = GlobalData::sharedDirector()->getUnitType();
+
     unitDataMap unitData = GlobalData::sharedDirector()->getUnitDefaultData();
-    m_nHp -= unitData[vecUnitType[shooter]].nDC;
+    m_nHp -= unitData[GlobalData::sharedDirector()->getUnitTypeByIndex(shooter)].nDC;
+    ((UnitsLayer*)(getParent()))->OnDead(m_eUnitIndex);
     if(m_nHp<=0) removeFromParent();
 }
 
@@ -159,7 +160,7 @@ bool UnitsLayer::Init()
     do
     {
         ccpVector unitsPos = GlobalData::sharedDirector()->getUnitPos();
-        unitTypeVector vecUnitType;
+        unitTypeMap mapUnitType;
         
         for (int i=enUnitIndexMy1; i<enUnitIndexMax; i++)
         {
@@ -167,22 +168,22 @@ bool UnitsLayer::Init()
             if(i<enUnitIndexEnemy1)
             {
                 enUnitType eUnitType = CCRANDOM_0_1()>0.5?enUnitTypeCarMine:enUnitTypeTroopMine;
-                Unit* pUnit = Unit::CreateUnit(eUnitType);
-                vecUnitType.push_back(eUnitType);
+                Unit* pUnit = Unit::CreateUnit(eUnitType,(enUnitIndex)i);
+                mapUnitType.insert(pair<enUnitIndex, enUnitType>((enUnitIndex)i,eUnitType));
                 pUnit->setPosition(unitsPos[i]);
                 addChild(pUnit,enZOrderFront,enUnitIndexMy1+i);
             }
             else
             {
                 enUnitType eUnitType = CCRANDOM_0_1()>0.5?enUnitTypeCarEnemy:enUnitTypeTroopEnemy;
-                Unit* pUnit = Unit::CreateUnit(eUnitType);
-                vecUnitType.push_back(eUnitType);
+                Unit* pUnit = Unit::CreateUnit(eUnitType,(enUnitIndex)i);
+                mapUnitType.insert(pair<enUnitIndex, enUnitType>((enUnitIndex)i,eUnitType));
                 pUnit->setPosition(unitsPos[i]);
                 addChild(pUnit,enZOrderFront,enUnitIndexMy1+i);
             }
         }
         
-        GlobalData::sharedDirector()->setUnitType(vecUnitType);
+        GlobalData::sharedDirector()->setUnitType(mapUnitType);
         return true;
     } while (false);
     CCLog("Function UnitsLayer::Init Error!");
@@ -198,6 +199,11 @@ void UnitsLayer::OnHit(enUnitIndex shooter, enUnitIndex target)
 {
     Unit* pU = (Unit*)getChildByTag(shooter);
     if(pU!=NULL)pU->OnHit(shooter);
+}
+
+void UnitsLayer::OnDead(enUnitIndex target)
+{
+    ((MainScene*)(getParent()))->OnDead(target);
 }
 
 void UnitsLayer::Update(float fT)

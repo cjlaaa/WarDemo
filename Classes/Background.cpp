@@ -114,14 +114,34 @@ void Background::OnHit(enUnitIndex target)
 
 void Background::OnDead(enUnitIndex target)
 {
+    enUnitType eType = GlobalData::sharedDirector()->getUnitTypeByIndex(target);
+    unitDataMap unitData = GlobalData::sharedDirector()->getUnitDefaultData();
     ccpVector unitsPos = GlobalData::sharedDirector()->getUnitPos();
     
-    CCNodeLoaderLibrary * ccNodeLoaderLibraryRight = CCNodeLoaderLibrary::newDefaultCCNodeLoaderLibrary();
-    CCBReader * ccbReaderRight = new CCBReader(ccNodeLoaderLibraryRight);
-    CCNode * bgRight = ccbReaderRight->readNodeGraphFromFile("ccb/background.ccbi", this);
-    CCBAnimationManager* animationManagerRight = ccbReaderRight->getAnimationManager();
-    animationManagerRight->runAnimationsForSequenceNamed("right");
-    ccbReaderRight->release();
+    if(eType==enUnitTypeTroopMine ||
+       eType==enUnitTypeTroopEnemy)
+    {
+        CCNodeLoaderLibrary * ccNodeLoaderLibrary = CCNodeLoaderLibrary::newDefaultCCNodeLoaderLibrary();
+        CCBReader * ccbReader = new CCBReader(ccNodeLoaderLibrary);
+        CCNode * ccbNode = ccbReader->readNodeGraphFromFile(unitData[eType].strCCBI.c_str(), this);
+        CCBAnimationManager* animationManager = ccbReader->getAnimationManager();
+        animationManager->runAnimationsForSequenceNamed("dead");
+        ccbReader->release();
+        ccbNode->setScaleX(0.5);//the bg sprite in ccb is scale.
+        
+        if(target<enUnitIndexEnemy1)
+        {
+            m_backgroundLeft->addChild(ccbNode);
+            ccbNode->setPosition(m_backgroundLeft->convertToNodeSpace(unitsPos[target]));
+            m_CraterArrayLeft->addObject(ccbNode);
+        }
+        else
+        {
+            m_backgroundRight->addChild(ccbNode);
+            ccbNode->setPosition(m_backgroundRight->convertToNodeSpace(unitsPos[target]));
+            m_CraterArrayRight->addObject(ccbNode);
+        }
+    }
 }
 
 void Background::Update(float)

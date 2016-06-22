@@ -23,9 +23,9 @@ class Unit : public CCLayer
 , public cocos2d::extension::CCNodeLoaderListener
 {
 public:
-    static Unit* CreateUnit(enUnitType eType);
+    static Unit* CreateUnit(enUnitType eType,enUnitIndex eIndex);
     void Update(float fT);
-    void OnHit(enUnitIndex shooter);
+    void OnHit(enUnitIndex target);
     
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char * pSelectorName);
     virtual SEL_CCControlHandler onResolveCCBCCControlSelector(CCObject * pTarget, const char * pSelectorName);
@@ -34,7 +34,7 @@ public:
     virtual void onNodeLoaded(CCNode * pNode, CCNodeLoader * pNodeLoader);
     virtual SEL_CallFuncN onResolveCCBCCCallFuncSelector(CCObject * pTarget, const char* pSelectorName);
 protected:
-    bool Init(enUnitType eType);
+    bool Init(enUnitType eType,enUnitIndex eIndex);
     void Fire();
     void AnimationCallBack();
     
@@ -44,6 +44,7 @@ protected:
     enUnitStatus m_eUnitStatus;
     enUnitType m_eUnitType;
     UnitData m_unitData;
+    enUnitIndex m_eUnitIndex;
 };
 
 class UnitsLayer : public CCLayer
@@ -54,6 +55,7 @@ public:
     
     void OnFire(CCNode* pNode,enUnitIndex eTarget);
     void OnHit(enUnitIndex shooter, enUnitIndex target);
+    void OnDead(enUnitIndex target);
 protected:
     bool Init();
 };
