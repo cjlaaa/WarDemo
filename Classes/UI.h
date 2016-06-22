@@ -37,6 +37,9 @@ public:
     void tableViewSubBtnCallback(CCObject* pSender);
 protected:
     bool Init();
+    void onEnter();
+    void addUI(enUnitType eType,enUnitIndex eIndex);
+    
     CCSprite* m_tableViewBg;
 };
 

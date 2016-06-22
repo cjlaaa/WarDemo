@@ -56,6 +56,7 @@ public:
     void OnFire(CCNode* pNode,enUnitIndex eTarget);
     void OnHit(enUnitIndex shooter, enUnitIndex target);
     void OnDead(enUnitIndex target);
+    void addUnit(enUnitType eType,enUnitIndex eIndex);
 protected:
     bool Init();
 };

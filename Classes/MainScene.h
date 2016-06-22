@@ -22,6 +22,7 @@ public:
     void OnFire(enUnitIndex shooter, enUnitIndex target);
     void OnHit(enUnitIndex shooter, enUnitIndex target);
     void OnDead(enUnitIndex target);
+    void addUnit(enUnitType eType,enUnitIndex eIndex);
 private:
     void Update(float);
 };

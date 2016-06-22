@@ -70,6 +70,12 @@ void MainScene::OnDead(enUnitIndex target)
     pBg->OnDead(target);
 }
 
+void MainScene::addUnit(enUnitType eType,enUnitIndex eIndex)
+{
+    UnitsLayer* pUnitLayer = (UnitsLayer*)(getChildByTag(enTagUnitsLayer));
+    pUnitLayer->addUnit(eType, eIndex);
+}
+
 void MainScene::menuCloseCallback(CCObject* pSender)
 {
     CCDirector::sharedDirector()->end();

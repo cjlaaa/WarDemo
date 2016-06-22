@@ -137,35 +137,23 @@ bool UnitsLayer::Init()
 {
     do
     {
-        ccpVector unitsPos = GlobalData::sharedDirector()->getUnitPos();
-        unitTypeMap mapUnitType;
-        
-        for (int i=enUnitIndexMy1; i<enUnitIndexMax; i++)
-        {
-            
-            if(i<enUnitIndexEnemy1)
-            {
-                enUnitType eUnitType = CCRANDOM_0_1()>0.5?enUnitTypeCarMine:enUnitTypeTroopMine;
-                Unit* pUnit = Unit::CreateUnit(eUnitType,(enUnitIndex)i);
-                mapUnitType.insert(pair<enUnitIndex, enUnitType>((enUnitIndex)i,eUnitType));
-                pUnit->setPosition(unitsPos[i]);
-                addChild(pUnit,enZOrderFront,enUnitIndexMy1+i);
-            }
-            else
-            {
-                enUnitType eUnitType = CCRANDOM_0_1()>0.5?enUnitTypeCarEnemy:enUnitTypeTroopEnemy;
-                Unit* pUnit = Unit::CreateUnit(eUnitType,(enUnitIndex)i);
-                mapUnitType.insert(pair<enUnitIndex, enUnitType>((enUnitIndex)i,eUnitType));
-                pUnit->setPosition(unitsPos[i]);
-                addChild(pUnit,enZOrderFront,enUnitIndexMy1+i);
-            }
-        }
-        
-        GlobalData::sharedDirector()->setUnitType(mapUnitType);
         return true;
     } while (false);
     CCLog("Function UnitsLayer::Init Error!");
     return false;
+}
+
+void UnitsLayer::addUnit(enUnitType eType,enUnitIndex eIndex)
+{
+    ccpVector unitsPos = GlobalData::sharedDirector()->getUnitPos();
+    unitTypeMap mapUnitType;
+    
+    enUnitType eUnitType = eType;
+    Unit* pUnit = Unit::CreateUnit(eUnitType,eIndex);
+    pUnit->setPosition(unitsPos[eIndex]);
+    addChild(pUnit,enZOrderFront,enUnitIndexMy1+eIndex);
+    
+    GlobalData::sharedDirector()->setUnitTypeByIndex(eIndex, eType);
 }
 
 void UnitsLayer::OnFire(CCNode* pNode,enUnitIndex eTarget)

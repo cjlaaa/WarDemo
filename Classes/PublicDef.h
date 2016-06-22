@@ -81,7 +81,7 @@ public:
     ccpVector getUnitPos() {return m_UnitPos;}
     unitDataMap getUnitDefaultData() {return m_UnitDefaultData;}
     unitTypeMap getUnitType() {return m_UnitType;}
-    void setUnitType(unitTypeMap unitType) {m_UnitType = unitType;};
+    void setUnitTypeByIndex(enUnitIndex eIndex, enUnitType eType) {m_UnitType[eIndex] = eType;};
     enUnitType getUnitTypeByIndex(enUnitIndex eIndex) {return m_UnitType[eIndex];}
 private:
     unitTypeMap m_UnitType;

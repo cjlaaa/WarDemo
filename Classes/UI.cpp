@@ -7,6 +7,7 @@
 //
 
 #include "UI.h"
+#include "MainScene.h"
 
 UI* UI::CreateUI()
 {
@@ -49,6 +50,29 @@ bool UI::Init()
     } while (false);
     CCLog("Function UI::Init Error!");
     return false;
+}
+
+void UI::onEnter()
+{
+    CCLayer::onEnter();
+    
+    for (int i=enUnitIndexMy1; i<enUnitIndexMax; i++)
+    {
+        if (i<=enUnitIndexMy5)
+        {
+            addUI(CCRANDOM_0_1()>0.5?enUnitTypeCarMine:enUnitTypeTroopMine, (enUnitIndex)i);
+        }
+        else
+        {
+            addUI(CCRANDOM_0_1()>0.5?enUnitTypeCarEnemy:enUnitTypeTroopEnemy, (enUnitIndex)i);
+        }
+    }
+}
+
+void UI::addUI(enUnitType eType,enUnitIndex eIndex)
+{
+    MainScene* pMainScene = (MainScene*)(getParent());
+    pMainScene->addUnit(eType, eIndex);
 }
 
 bool UI::onAssignCCBMemberVariable(cocos2d::CCObject * pTarget, const char * pMemberVariableName, cocos2d::CCNode * pNode)
