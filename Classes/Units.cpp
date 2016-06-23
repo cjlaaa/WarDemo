@@ -145,7 +145,7 @@ bool UnitsLayer::Init()
 
 void UnitsLayer::addUnit(enUnitType eType,enUnitIndex eIndex)
 {
-    ccpVector unitsPos = GlobalData::sharedDirector()->getUnitPos();
+    unitPosMap unitsPos = GlobalData::sharedDirector()->getUnitPos();
     unitTypeMap mapUnitType;
     
     enUnitType eUnitType = eType;

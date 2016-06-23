@@ -95,9 +95,10 @@ void Background::onExit()
 
 void Background::OnHit(enUnitIndex target)
 {
-    ccpVector unitsPos = GlobalData::sharedDirector()->getUnitPos();
+    unitPosMap unitsPos = GlobalData::sharedDirector()->getUnitPos();
     
-    CCSprite* pCrater = CCSprite::create("crater1.png");
+    CCSprite* pCrater = CCSprite::create("keng.png");
+    pCrater->setScale(0.3);
     if(target<enUnitIndexEnemy1)
     {
         m_backgroundLeft->addChild(pCrater);
@@ -116,7 +117,7 @@ void Background::OnDead(enUnitIndex target)
 {
     enUnitType eType = GlobalData::sharedDirector()->getUnitTypeByIndex(target);
     unitDataMap unitData = GlobalData::sharedDirector()->getUnitDefaultData();
-    ccpVector unitsPos = GlobalData::sharedDirector()->getUnitPos();
+    unitPosMap unitsPos = GlobalData::sharedDirector()->getUnitPos();
     
     if(eType==enUnitTypeTroopMine ||
        eType==enUnitTypeTroopEnemy)

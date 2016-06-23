@@ -48,15 +48,17 @@ struct UnitData
     UnitData()
     {
         strCCBI = "";
+        strTexture = "";
         eType = enUnitTypeError;
         nHp = 0;
         nDC = 0;
         nFireCD = 0;
     }
     
-    UnitData(string ccbi, enUnitType type, int hp, int dc, int firecd)
+    UnitData(string ccbi, string texture, enUnitType type, int hp, int dc, int firecd)
     {
         strCCBI = ccbi;
+        strTexture = texture;
         eType = type;
         nHp = hp;
         nDC = dc;
@@ -64,13 +66,14 @@ struct UnitData
     }
     
     string strCCBI;
+    string strTexture;
     enUnitType eType;
     int nHp;
     int nDC;
     int nFireCD;
 };
 
-typedef vector<CCPoint> ccpVector;
+typedef map<enUnitIndex,CCPoint> unitPosMap;
 typedef map<enUnitType,UnitData> unitDataMap;
 typedef map<enUnitIndex,enUnitType> unitTypeMap;
 class GlobalData
@@ -78,14 +81,14 @@ class GlobalData
 public:
     static GlobalData* sharedDirector(void);
     virtual bool init(void);
-    ccpVector getUnitPos() {return m_UnitPos;}
+    unitPosMap getUnitPos() {return m_UnitPos;}
     unitDataMap getUnitDefaultData() {return m_UnitDefaultData;}
     unitTypeMap getUnitType() {return m_UnitType;}
     void setUnitTypeByIndex(enUnitIndex eIndex, enUnitType eType) {m_UnitType[eIndex] = eType;};
     enUnitType getUnitTypeByIndex(enUnitIndex eIndex) {return m_UnitType[eIndex];}
 private:
     unitTypeMap m_UnitType;
-    ccpVector m_UnitPos;
+    unitPosMap m_UnitPos;
     unitDataMap m_UnitDefaultData;
 };
 

@@ -96,7 +96,7 @@ void BulletLayer::Update(float)
 
 void BulletLayer::shoot(enUnitIndex shooter,enUnitIndex target)
 {
-    ccpVector unitPos = GlobalData::sharedDirector()->getUnitPos();
+    unitPosMap unitPos = GlobalData::sharedDirector()->getUnitPos();
     float fBulletRunTime = 0.5;
     CCClippingNode * clippingNodeLeft = (CCClippingNode*)(getChildByTag(enTagClippingNodeLeft));
     CCClippingNode * clippingNodeRight = (CCClippingNode*)(getChildByTag(enTagClippingNodeRight));
