@@ -163,7 +163,7 @@ void UnitsLayer::OnFire(CCNode* pNode,enUnitIndex eTarget)
 
 void UnitsLayer::OnHit(enUnitIndex shooter, enUnitIndex target)
 {
-    Unit* pU = (Unit*)getChildByTag(shooter);
+    Unit* pU = (Unit*)getChildByTag(target);
     if(pU!=NULL)pU->OnHit(shooter);
 }
 
