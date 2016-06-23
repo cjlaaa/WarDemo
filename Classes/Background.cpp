@@ -143,6 +143,30 @@ void Background::OnDead(enUnitIndex target)
             m_CraterArrayRight->addObject(ccbNode);
         }
     }
+    else if(eType==enUnitTypeCarMine ||
+            eType==enUnitTypeCarEnemy)
+    {
+        CCNodeLoaderLibrary * ccNodeLoaderLibrary = CCNodeLoaderLibrary::newDefaultCCNodeLoaderLibrary();
+        CCBReader * ccbReader = new CCBReader(ccNodeLoaderLibrary);
+        CCNode * ccbNode = ccbReader->readNodeGraphFromFile("ccb/boom.ccbi", this);
+        CCBAnimationManager* animationManager = ccbReader->getAnimationManager();
+        animationManager->runAnimationsForSequenceNamed("boom");
+        ccbReader->release();
+        ccbNode->setScaleX(0.5);//the bg sprite in ccb is scale.
+        
+        if(target<enUnitIndexEnemy1)
+        {
+            m_backgroundLeft->addChild(ccbNode);
+            ccbNode->setPosition(m_backgroundLeft->convertToNodeSpace(unitsPos[target]));
+            m_CraterArrayLeft->addObject(ccbNode);
+        }
+        else
+        {
+            m_backgroundRight->addChild(ccbNode);
+            ccbNode->setPosition(m_backgroundRight->convertToNodeSpace(unitsPos[target]));
+            m_CraterArrayRight->addObject(ccbNode);
+        }
+    }
 }
 
 void Background::Update(float)

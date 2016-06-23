@@ -95,7 +95,7 @@ void Unit::OnHit(enUnitIndex shooter)
         removeFromParent();
     }
     
-    CCLog("%d %d",m_eUnitIndex,m_nHp);
+//    CCLog("%d %d",m_eUnitIndex,m_nHp);
 }
 
 void Unit::Fire()
