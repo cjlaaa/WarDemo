@@ -14,6 +14,7 @@
 enum
 {
     enTagTableView,
+    enTagMenuBF,
 };
 
 enum
@@ -45,12 +46,13 @@ class UI : public CCLayer
 public:
     static UI* CreateUI();
     
-    virtual cocos2d::SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char * pSelectorName){};
+    virtual cocos2d::SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char * pSelectorName);
     virtual cocos2d::extension::SEL_CCControlHandler onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char * pSelectorName){};
     virtual bool onAssignCCBMemberVariable(cocos2d::CCObject * pTarget, const char * pMemberVariableName, cocos2d::CCNode * pNode);
     virtual bool onAssignCCBCustomProperty(CCObject* pTarget, const char* pMemberVariableName, cocos2d::extension::CCBValue* pCCBValue){};
     virtual void onNodeLoaded(cocos2d::CCNode * pNode, cocos2d::extension::CCNodeLoader * pNodeLoader){};
     virtual SEL_CallFuncN onResolveCCBCCCallFuncSelector(CCObject * pTarget, const char* pSelectorName){};
+    void onStartGame(CCObject * pSender);
     
     virtual void scrollViewDidScroll(cocos2d::extension::CCScrollView* view){};
     virtual void scrollViewDidZoom(cocos2d::extension::CCScrollView* view){};
@@ -66,6 +68,7 @@ protected:
     void removeUnit(CCNode* pNode);
     
     CCSprite* m_tableViewBg;
+    CCMenuItemImage* m_startGame;
     uiUnitVector m_unitData;
     vector<enUnitType> m_vecBattleFieldStatus;
 };

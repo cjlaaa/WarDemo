@@ -82,6 +82,12 @@ void MainScene::removeUnit(enUnitIndex eIndex)
     pUnitLayer->removeUnit(eIndex);
 }
 
+void MainScene::OnStartGame()
+{
+    UnitsLayer* pUnitLayer = (UnitsLayer*)(getChildByTag(enTagUnitsLayer));
+    pUnitLayer->StartGame();
+}
+
 void MainScene::menuCloseCallback(CCObject* pSender)
 {
     CCDirector::sharedDirector()->end();

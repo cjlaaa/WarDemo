@@ -24,6 +24,7 @@ public:
     void OnDead(enUnitIndex target);
     void addUnit(enUnitType eType,enUnitIndex eIndex);
     void removeUnit(enUnitIndex eIndex);
+    void OnStartGame();
 private:
     void Update(float);
 };

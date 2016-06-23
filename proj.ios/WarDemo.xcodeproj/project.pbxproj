@@ -19,6 +19,8 @@
 		0F633EA91D1A859900EB0468 /* UI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F633EA71D1A859900EB0468 /* UI.cpp */; };
 		0F633EB01D1A93D500EB0468 /* ui5.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F633EAF1D1A93D500EB0468 /* ui5.png */; };
 		0F633EB31D1B82F100EB0468 /* keng.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F633EB21D1B82F100EB0468 /* keng.png */; };
+		0F633EC01D1BD7D900EB0468 /* clickme-down.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F633EBE1D1BD7D900EB0468 /* clickme-down.png */; };
+		0F633EC11D1BD7D900EB0468 /* clickme.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F633EBF1D1BD7D900EB0468 /* clickme.png */; };
 		15A3D8FF1682F7D5002FB0C5 /* b2BroadPhase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15A3D88B1682F7D5002FB0C5 /* b2BroadPhase.cpp */; };
 		15A3D9001682F7D5002FB0C5 /* b2CollideCircle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15A3D88D1682F7D5002FB0C5 /* b2CollideCircle.cpp */; };
 		15A3D9011682F7D5002FB0C5 /* b2CollideEdge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15A3D88E1682F7D5002FB0C5 /* b2CollideEdge.cpp */; };
@@ -267,6 +269,8 @@
 		0F633EA81D1A859900EB0468 /* UI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UI.h; path = ../Classes/UI.h; sourceTree = "<group>"; };
 		0F633EAF1D1A93D500EB0468 /* ui5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ui5.png; sourceTree = "<group>"; };
 		0F633EB21D1B82F100EB0468 /* keng.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keng.png; sourceTree = "<group>"; };
+		0F633EBE1D1BD7D900EB0468 /* clickme-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clickme-down.png"; sourceTree = "<group>"; };
+		0F633EBF1D1BD7D900EB0468 /* clickme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clickme.png; sourceTree = "<group>"; };
 		15A3D87E1682F7B3002FB0C5 /* cocos2dx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2dx.xcodeproj; path = ../../../cocos2dx/proj.ios/cocos2dx.xcodeproj; sourceTree = "<group>"; };
 		15A3D8891682F7D5002FB0C5 /* Box2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box2D.h; sourceTree = "<group>"; };
 		15A3D88B1682F7D5002FB0C5 /* b2BroadPhase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2BroadPhase.cpp; sourceTree = "<group>"; };
@@ -1515,6 +1519,8 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0F633EBE1D1BD7D900EB0468 /* clickme-down.png */,
+				0F633EBF1D1BD7D900EB0468 /* clickme.png */,
 				0F633EB21D1B82F100EB0468 /* keng.png */,
 				0F633EAF1D1A93D500EB0468 /* ui5.png */,
 				0F0CA7431D1924210050F028 /* crater1.png */,
@@ -1620,11 +1626,13 @@
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
 				0F633EB01D1A93D500EB0468 /* ui5.png in Resources */,
+				0F633EC11D1BD7D900EB0468 /* clickme.png in Resources */,
 				0F34C6DC1D13CD3900C07573 /* ccbResources in Resources */,
 				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
 				0F0CA7421D18DD290050F028 /* dandao_00000.png in Resources */,
 				1A9CE8881765A12C000E3062 /* json_internalarray.inl in Resources */,
 				1A9CE8891765A12C000E3062 /* json_internalmap.inl in Resources */,
+				0F633EC01D1BD7D900EB0468 /* clickme-down.png in Resources */,
 				0F0CA7461D1924210050F028 /* crater2.png in Resources */,
 				1A9CE88C1765A12C000E3062 /* json_valueiterator.inl in Resources */,
 				1A9CE88E1765A12C000E3062 /* sconscript in Resources */,

@@ -105,11 +105,11 @@ void BulletLayer::shoot(enUnitIndex shooter,enUnitIndex target)
     Bullet* pBulletLeft = Bullet::CreateBullet();
     pBulletLeft->setPosition(unitPos[shooter]);
     CCPoint ccpTarget;
-    if(shooter <= enUnitIndexMy5) ccpTarget=ccp(SCREEN_WIDTH,SCREEN_HEIGHT);
+    if(shooter < enUnitIndexEnemy1) ccpTarget=ccp(SCREEN_WIDTH,SCREEN_HEIGHT);
     else ccpTarget = ccp(0,0);
     pBulletLeft->runAction(CCSequence::create(CCMoveTo::create(fBulletRunTime, ccpTarget),
                                      CCCallFuncN::create(pBulletLeft, callfuncN_selector(BulletLayer::moveToTargetCallback))));
-    if(shooter<=enUnitIndexMy5)clippingNodeLeft->addChild(pBulletLeft);
+    if(shooter< enUnitIndexEnemy1)clippingNodeLeft->addChild(pBulletLeft);
     else clippingNodeRight->addChild(pBulletLeft);
     
     ShootData* pData = new ShootData;

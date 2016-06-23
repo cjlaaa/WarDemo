@@ -58,7 +58,7 @@ bool UI::Init()
         }
         CCMenu* pMenu = CCMenu::createWithArray(pBtnArray);
         pMenu->setPosition(CCPointZero);
-        this->addChild(pMenu);
+        this->addChild(pMenu,enZOrderFront,enTagMenuBF);
         pBtnArray->release();
         
         CCTableView* tableView = CCTableView::create(this,
@@ -71,6 +71,9 @@ bool UI::Init()
         this->addChild(tableView,enZOrderFront,enTagTableView);
         tableView->reloadData();
 //        tableView->setBounceable(false);
+        
+        m_startGame->setScale(0.4);
+        m_startGame->setVisible(false);
         
         return true;
     } while (false);
@@ -96,6 +99,17 @@ void UI::removeUnit(CCNode* pNode)
     m_vecBattleFieldStatus[index] = enUnitTypeError;
     CCTableView* pList = (CCTableView*)getChildByTag(enTagTableView);
     pList->reloadData();
+    
+    bool bIsShowBtn = false;
+    for (int i=0; i<m_vecBattleFieldStatus.size(); i++)
+    {
+        if(m_vecBattleFieldStatus[i]!=enUnitTypeError)
+        {
+            bIsShowBtn = true;
+            break;
+        }
+    }
+    m_startGame->setVisible(bIsShowBtn);
 }
 
 void UI::onEnter()
@@ -104,7 +118,7 @@ void UI::onEnter()
     
     for (int i=enUnitIndexMy1; i<enUnitIndexMax; i++)
     {
-        if (i<=enUnitIndexMy5)
+        if (i<enUnitIndexEnemy1)
         {
 //            addUnit(CCRANDOM_0_1()>0.5?enUnitTypeCarMine:enUnitTypeTroopMine, (enUnitIndex)i);
         }
@@ -121,10 +135,30 @@ void UI::addUnit(enUnitType eType,enUnitIndex eIndex)
     pMainScene->addUnit(eType, eIndex);
 }
 
-bool UI::onAssignCCBMemberVariable(cocos2d::CCObject * pTarget, const char * pMemberVariableName, cocos2d::CCNode * pNode)
+SEL_MenuHandler UI::onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char * pSelectorName)
+{
+    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "startgame", UI::onStartGame);
+    
+    return NULL;
+}
+
+void UI::onStartGame(CCObject * pSender)
+{
+    MainScene* pMainScene = (MainScene*)(getParent());
+    pMainScene->OnStartGame();
+    
+    m_startGame->setVisible(false);
+    m_tableViewBg->setVisible(false);
+    CCMenu* pMenu = (CCMenu*)getChildByTag(enTagMenuBF);
+    pMenu->setVisible(false);
+    CCTableView* pT = (CCTableView*)getChildByTag(enTagTableView);
+    pT->setVisible(false);
+}
+
+bool UI::onAssignCCBMemberVariable(CCObject * pTarget, const char * pMemberVariableName, CCNode * pNode)
 {
     CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "tableViewBg", CCSprite*, m_tableViewBg);
-    
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "startgame", CCMenuItemImage*, m_startGame);
     return true;
 };
 
@@ -147,6 +181,7 @@ void UI::tableCellTouched(CCTableView* table, CCTableViewCell* cell)
         {
             m_unitData[cell->getIdx()].nNum -= 1;
             addUnit(m_unitData[cell->getIdx()].Data.eType, (enUnitIndex)nIndex);
+            m_startGame->setVisible(true);
             m_vecBattleFieldStatus[nIndex] = m_unitData[cell->getIdx()].Data.eType;
             
             CCTableView* pList = (CCTableView*)getChildByTag(enTagTableView);

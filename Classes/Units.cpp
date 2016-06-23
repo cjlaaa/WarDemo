@@ -94,6 +94,8 @@ void Unit::OnHit(enUnitIndex shooter)
         ((UnitsLayer*)(getParent()))->OnDead(m_eUnitIndex);
         removeFromParent();
     }
+    
+    CCLog("%d %d",m_eUnitIndex,m_nHp);
 }
 
 void Unit::Fire()
@@ -101,7 +103,7 @@ void Unit::Fire()
     m_animationManager->runAnimationsForSequenceNamed("fire");
     enUnitIndex eTarget;
     
-    if(m_nTag <= enUnitIndexMy5)
+    if(m_nTag < enUnitIndexEnemy1)
     {
 //        eTarget = (enTagUnit)(m_nTag + 5);
         
