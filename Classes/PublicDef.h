@@ -76,6 +76,7 @@ struct UnitData
 typedef map<enUnitIndex,CCPoint> unitPosMap;
 typedef map<enUnitType,UnitData> unitDataMap;
 typedef map<enUnitIndex,enUnitType> unitTypeMap;
+typedef map<enUnitType,int> unitNumMap;
 class GlobalData
 {
 public:
@@ -86,10 +87,12 @@ public:
     unitTypeMap getUnitType() {return m_UnitType;}
     void setUnitTypeByIndex(enUnitIndex eIndex, enUnitType eType) {m_UnitType[eIndex] = eType;};
     enUnitType getUnitTypeByIndex(enUnitIndex eIndex) {return m_UnitType[eIndex];}
+    unitNumMap getPlayerUnitNum() {return m_PlayerUnitNum;}
 private:
     unitTypeMap m_UnitType;
     unitPosMap m_UnitPos;
     unitDataMap m_UnitDefaultData;
+    unitNumMap m_PlayerUnitNum;
 };
 
 enum

@@ -76,6 +76,12 @@ void MainScene::addUnit(enUnitType eType,enUnitIndex eIndex)
     pUnitLayer->addUnit(eType, eIndex);
 }
 
+void MainScene::removeUnit(enUnitIndex eIndex)
+{
+    UnitsLayer* pUnitLayer = (UnitsLayer*)(getChildByTag(enTagUnitsLayer));
+    pUnitLayer->removeUnit(eIndex);
+}
+
 void MainScene::menuCloseCallback(CCObject* pSender)
 {
     CCDirector::sharedDirector()->end();

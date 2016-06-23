@@ -34,7 +34,7 @@ bool Unit::Init(enUnitType eType,enUnitIndex eIndex)
         
         m_nFireCd = m_unitData.nFireCD;
         m_eUnitType = m_unitData.eType;
-        m_eUnitStatus = enUnitStatusIdle;
+        m_eUnitStatus = enUnitStatusPre;
         m_nHp = m_unitData.nHp;
         m_eUnitIndex = eIndex;
         
@@ -55,20 +55,28 @@ bool Unit::Init(enUnitType eType,enUnitIndex eIndex)
 
 void Unit::Update(float fT)
 {
-    if(m_nFireCd<0)
+    if(m_eUnitStatus==enUnitStatusFight)
     {
-        m_nFireCd = m_unitData.nFireCD;
-        Fire();
-    }
-    else
-    {
-        m_nFireCd -= CCRANDOM_0_1()*10;
+        if(m_nFireCd<0)
+        {
+            m_nFireCd = m_unitData.nFireCD;
+            Fire();
+        }
+        else
+        {
+            m_nFireCd -= CCRANDOM_0_1()*10;
+        }
     }
 }
 
 void Unit::AnimationCallBack()
 {
     m_animationManager->runAnimationsForSequenceNamed("run");
+}
+
+void Unit::SetStatus(enUnitStatus eStatus)
+{
+    m_eUnitStatus = eStatus;
 }
 
 void Unit::OnHit(enUnitIndex shooter)
@@ -143,6 +151,15 @@ bool UnitsLayer::Init()
     return false;
 }
 
+void UnitsLayer::StartGame()
+{
+    for (int i=0; i<enUnitIndexMax; i++)
+    {
+        Unit* pU = (Unit*)(getChildByTag(i));
+        if(pU!=NULL)pU->SetStatus(enUnitStatusFight);
+    }
+}
+
 void UnitsLayer::addUnit(enUnitType eType,enUnitIndex eIndex)
 {
     unitPosMap unitsPos = GlobalData::sharedDirector()->getUnitPos();
@@ -154,6 +171,12 @@ void UnitsLayer::addUnit(enUnitType eType,enUnitIndex eIndex)
     addChild(pUnit,enZOrderFront,enUnitIndexMy1+eIndex);
     
     GlobalData::sharedDirector()->setUnitTypeByIndex(eIndex, eType);
+}
+
+void UnitsLayer::removeUnit(enUnitIndex eIndex)
+{
+    Unit* pUnit = (Unit*)getChildByTag(eIndex);
+    if(pUnit!=NULL)removeChild(pUnit);
 }
 
 void UnitsLayer::OnFire(CCNode* pNode,enUnitIndex eTarget)

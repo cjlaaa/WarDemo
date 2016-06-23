@@ -29,11 +29,37 @@ bool UI::Init()
 {
     do
     {
+        unitNumMap playerWeaponNum = GlobalData::sharedDirector()->getPlayerUnitNum();
+        unitDataMap unitData = GlobalData::sharedDirector()->getUnitDefaultData();
+        for (unitNumMap::iterator it=playerWeaponNum.begin(); it!=playerWeaponNum.end(); ++it)
+        {
+            m_unitData.push_back(uiUnit(unitData[it->first],it->second));
+        }
+        
         CCNodeLoaderLibrary * ccNodeLoaderLibrary = CCNodeLoaderLibrary::newDefaultCCNodeLoaderLibrary();
         CCBReader * ccbReader = new CCBReader(ccNodeLoaderLibrary);
         CCNode * ccbNode = ccbReader->readNodeGraphFromFile("ccb/ui.ccbi", this);
         ccbReader->release();
         addChild(ccbNode,enZOrderFront);
+        
+        unitPosMap unitPos = GlobalData::sharedDirector()->getUnitPos();
+        CCArray* pBtnArray = CCArray::create();
+        for (int i=enUnitIndexMy1; i<enUnitIndexEnemy1; i++)
+        {
+            m_vecBattleFieldStatus.push_back(enUnitTypeError);
+            CCMenuItemImage *pBtn = CCMenuItemImage::create("CloseNormal.png",
+                                                                  "CloseSelected.png",
+                                                                  this,
+                                                                  menu_selector(UI::removeUnit));
+            pBtn->setTag(i);
+            pBtn->setScale(2);
+            pBtn->setPosition(unitPos[(enUnitIndex)i]);
+            pBtnArray->addObject(pBtn);
+        }
+        CCMenu* pMenu = CCMenu::createWithArray(pBtnArray);
+        pMenu->setPosition(CCPointZero);
+        this->addChild(pMenu);
+        pBtnArray->release();
         
         CCTableView* tableView = CCTableView::create(this,
                                                      ccp(m_tableViewBg->getContentSize().width*m_tableViewBg->getScaleX(),
@@ -42,14 +68,34 @@ bool UI::Init()
         tableView->setPosition(ccp(0,0));
         tableView->setDelegate(this);
         tableView->setVerticalFillOrder(kCCTableViewFillTopDown);
-        this->addChild(tableView,enZOrderFront);
+        this->addChild(tableView,enZOrderFront,enTagTableView);
         tableView->reloadData();
-        tableView->setBounceable(false);
+//        tableView->setBounceable(false);
         
         return true;
     } while (false);
     CCLog("Function UI::Init Error!");
     return false;
+}
+
+void UI::removeUnit(CCNode* pNode)
+{
+    enUnitIndex index = (enUnitIndex)(pNode->getTag());
+//    CCLog("%d",index);
+    
+    for (int i=0; i<m_unitData.size(); i++)
+    {
+        if(m_unitData[i].Data.eType==m_vecBattleFieldStatus[index])
+        {
+            ((MainScene*)(getParent()))->removeUnit(index);
+            m_unitData[i].nNum++;
+            break;
+        }
+    }
+    
+    m_vecBattleFieldStatus[index] = enUnitTypeError;
+    CCTableView* pList = (CCTableView*)getChildByTag(enTagTableView);
+    pList->reloadData();
 }
 
 void UI::onEnter()
@@ -60,16 +106,16 @@ void UI::onEnter()
     {
         if (i<=enUnitIndexMy5)
         {
-            addUI(CCRANDOM_0_1()>0.5?enUnitTypeCarMine:enUnitTypeTroopMine, (enUnitIndex)i);
+//            addUnit(CCRANDOM_0_1()>0.5?enUnitTypeCarMine:enUnitTypeTroopMine, (enUnitIndex)i);
         }
         else
         {
-            addUI(CCRANDOM_0_1()>0.5?enUnitTypeCarEnemy:enUnitTypeTroopEnemy, (enUnitIndex)i);
+            addUnit(CCRANDOM_0_1()>0.5?enUnitTypeCarEnemy:enUnitTypeTroopEnemy, (enUnitIndex)i);
         }
     }
 }
 
-void UI::addUI(enUnitType eType,enUnitIndex eIndex)
+void UI::addUnit(enUnitType eType,enUnitIndex eIndex)
 {
     MainScene* pMainScene = (MainScene*)(getParent());
     pMainScene->addUnit(eType, eIndex);
@@ -84,7 +130,29 @@ bool UI::onAssignCCBMemberVariable(cocos2d::CCObject * pTarget, const char * pMe
 
 void UI::tableCellTouched(CCTableView* table, CCTableViewCell* cell)
 {
-    CCLog("tableCellTouched,%d",cell->getIdx());
+//    CCLog("tableCellTouched,%d",cell->getIdx());
+    if(m_unitData[cell->getIdx()].nNum>0)
+    {
+        int nIndex = -1;
+        for (int i=0; i<m_vecBattleFieldStatus.size(); i++)
+        {
+            if(m_vecBattleFieldStatus[i]==enUnitTypeError)
+            {
+                nIndex = i;
+                break;
+            }
+        }
+        
+        if(nIndex>=0)
+        {
+            m_unitData[cell->getIdx()].nNum -= 1;
+            addUnit(m_unitData[cell->getIdx()].Data.eType, (enUnitIndex)nIndex);
+            m_vecBattleFieldStatus[nIndex] = m_unitData[cell->getIdx()].Data.eType;
+            
+            CCTableView* pList = (CCTableView*)getChildByTag(enTagTableView);
+            pList->reloadData();
+        }
+    }
 }
 
 CCSize UI::tableCellSizeForIndex(CCTableView *table, unsigned int idx)
@@ -104,7 +172,7 @@ void UI::tableViewSubBtnCallback(CCObject* pSender)
 
 CCTableViewCell* UI::tableCellAtIndex(CCTableView *table, unsigned int idx)
 {
-    CCString *string = CCString::createWithFormat("%d", idx);
+    CCString *num = CCString::createWithFormat("%d", m_unitData[idx].nNum);
     CCTableViewCell *cell = table->dequeueCell();
     if (!cell) {
         cell = new CCTableViewCell();
@@ -114,16 +182,24 @@ CCTableViewCell* UI::tableCellAtIndex(CCTableView *table, unsigned int idx)
         sprite->setPosition(ccp(0, 0));
         cell->addChild(sprite);
         
-        CCLabelTTF *label = CCLabelTTF::create(string->getCString(), "Helvetica", 20.0);
-        label->setPosition(CCPointZero);
+        CCLabelTTF *label = CCLabelTTF::create(num->getCString(), "Helvetica", 50.0);
+        label->setPosition(ccp(sprite->getContentSize().width-label->getContentSize().width,sprite->getContentSize().height/2));
         label->setAnchorPoint(CCPointZero);
-        label->setTag(123);
+        label->setTag(enTagInCellNum);
         cell->addChild(label);
+        
+        CCSprite* pPic = CCSprite::create(m_unitData[idx].Data.strTexture.c_str());
+        cell->addChild(pPic,enZOrderFront,enTagInCellTexture);
+        pPic->setScale(0.7);
+        pPic->setPosition(ccp(sprite->getContentSize().width/2,sprite->getContentSize().height/2));
     }
     else
     {
-        CCLabelTTF *label = (CCLabelTTF*)cell->getChildByTag(123);
-        label->setString(string->getCString());
+        CCLabelTTF *label = (CCLabelTTF*)cell->getChildByTag(enTagInCellNum);
+        label->setString(num->getCString());
+        
+        CCSprite* pPic = (CCSprite*)cell->getChildByTag(enTagInCellTexture);
+        pPic->initWithFile(m_unitData[idx].Data.strTexture.c_str());
     }
     
     
@@ -132,5 +208,5 @@ CCTableViewCell* UI::tableCellAtIndex(CCTableView *table, unsigned int idx)
 
 unsigned int UI::numberOfCellsInTableView(CCTableView *table)
 {
-    return 10;
+    return m_unitData.size();
 }

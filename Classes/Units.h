@@ -13,8 +13,8 @@
 
 enum enUnitStatus
 {
-    enUnitStatusIdle,
-    enUnitStatusDead,
+    enUnitStatusPre,
+    enUnitStatusFight,
 };
 
 class Unit : public CCLayer
@@ -26,6 +26,7 @@ public:
     static Unit* CreateUnit(enUnitType eType,enUnitIndex eIndex);
     void Update(float fT);
     void OnHit(enUnitIndex target);
+    void SetStatus(enUnitStatus eStatus);
     
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char * pSelectorName) {};
     virtual SEL_CCControlHandler onResolveCCBCCControlSelector(CCObject * pTarget, const char * pSelectorName){};
@@ -57,6 +58,8 @@ public:
     void OnHit(enUnitIndex shooter, enUnitIndex target);
     void OnDead(enUnitIndex target);
     void addUnit(enUnitType eType,enUnitIndex eIndex);
+    void removeUnit(enUnitIndex eIndex);
+    void StartGame();
 protected:
     bool Init();
 };

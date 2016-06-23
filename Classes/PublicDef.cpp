@@ -56,6 +56,7 @@ bool GlobalData::init()
                                                                 "ccbResources/troop/1/ID_257_TRIMd-1.png",
                                                                 enUnitTypeTroopEnemy,20,5,500)));
     
-    
+    m_PlayerUnitNum.insert(pair<enUnitType,int>(enUnitTypeCarMine,3));
+    m_PlayerUnitNum.insert(pair<enUnitType,int>(enUnitTypeTroopMine,3));
     return true;
 }

@@ -11,6 +11,30 @@
 
 #include "PublicDef.h"
 
+enum
+{
+    enTagTableView,
+};
+
+enum
+{
+    enTagInCellNum,
+    enTagInCellTexture,
+};
+
+struct uiUnit
+{
+    uiUnit(UnitData data, int num)
+    {
+        nNum = num;
+        Data = data;
+    }
+    
+    int nNum;
+    UnitData Data;
+};
+typedef  vector<uiUnit> uiUnitVector;
+
 class UI : public CCLayer
 , public cocos2d::extension::CCBSelectorResolver
 , public cocos2d::extension::CCBMemberVariableAssigner
@@ -38,9 +62,12 @@ public:
 protected:
     bool Init();
     void onEnter();
-    void addUI(enUnitType eType,enUnitIndex eIndex);
+    void addUnit(enUnitType eType,enUnitIndex eIndex);
+    void removeUnit(CCNode* pNode);
     
     CCSprite* m_tableViewBg;
+    uiUnitVector m_unitData;
+    vector<enUnitType> m_vecBattleFieldStatus;
 };
 
 #endif /* UI_hpp */
