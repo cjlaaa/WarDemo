@@ -62,6 +62,7 @@ public:
     void removeUnit(enUnitIndex eIndex);
     void StartGame();
     void StartGameUnitMoveCallback();
+    void reposUnit(enUnitIndex eIndex);
 protected:
     bool Init();
 };

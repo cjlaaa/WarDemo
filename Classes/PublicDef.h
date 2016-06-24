@@ -35,11 +35,13 @@ enum enUnitIndex
     enUnitIndexMy3,
     enUnitIndexMy4,
     enUnitIndexMy5,
+    enUnitIndexMy6,
     enUnitIndexEnemy1,
     enUnitIndexEnemy2,
     enUnitIndexEnemy3,
     enUnitIndexEnemy4,
     enUnitIndexEnemy5,
+    enUnitIndexEnemy6,
     enUnitIndexMax,
 };
 
@@ -78,13 +80,14 @@ struct UnitExpect
     UnitExpect()
     {
     }
-    UnitExpect(enUnitIndex ePrimary,enUnitIndex eSecondary,enUnitIndex eThird,enUnitIndex eFourth, enUnitIndex eFifth)
+    UnitExpect(enUnitIndex ePrimary,enUnitIndex eSecondary,enUnitIndex eThird,enUnitIndex eFourth, enUnitIndex eFifth, enUnitIndex eSixth)
     {
         primary = ePrimary;
         secondary = eSecondary;
         third = eThird;
         fourth = eFourth;
         fifth = eFifth;
+        sixth = eSixth;
     }
     
     enUnitIndex primary;
@@ -92,6 +95,7 @@ struct UnitExpect
     enUnitIndex third;
     enUnitIndex fourth;
     enUnitIndex fifth;
+    enUnitIndex sixth;
 };
 
 typedef map<enUnitIndex,CCPoint> unitPosMap;

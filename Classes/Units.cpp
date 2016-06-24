@@ -120,6 +120,7 @@ enUnitIndex Unit::getTarget()
     else if(GlobalData::sharedDirector()->getUnitTypeByIndex(unitExpect.third)!=enUnitTypeNone) eTarget=unitExpect.third;
     else if(GlobalData::sharedDirector()->getUnitTypeByIndex(unitExpect.fourth)!=enUnitTypeNone) eTarget=unitExpect.fourth;
     else if(GlobalData::sharedDirector()->getUnitTypeByIndex(unitExpect.fifth)!=enUnitTypeNone) eTarget=unitExpect.fifth;
+    else if(GlobalData::sharedDirector()->getUnitTypeByIndex(unitExpect.sixth)!=enUnitTypeNone) eTarget=unitExpect.sixth;
     
     return eTarget;
 }
@@ -155,7 +156,7 @@ void UnitsLayer::StartGame()
     GlobalData::sharedDirector()->setGameStartUnitPos();
     unitPosMap unitPos = GlobalData::sharedDirector()->getUnitPos();
     
-    for (int i=0; i<enUnitIndexEnemy1; i++)
+    for (int i=0; i<enUnitIndexMax; i++)
     {
         Unit* pU = (Unit*)(getChildByTag(i));
         if(pU!=NULL)pU->runAction(CCSequence::create(CCMoveTo::create(1, unitPos[(enUnitIndex)i]),
@@ -191,6 +192,18 @@ void UnitsLayer::removeUnit(enUnitIndex eIndex)
     if(pUnit!=NULL)removeChild(pUnit);
     
     GlobalData::sharedDirector()->setUnitTypeByIndex(eIndex, enUnitTypeNone);
+//    reposUnit(eIndex);
+}
+
+void UnitsLayer::reposUnit(enUnitIndex eIndex)
+{
+    unitPosMap unitsPos = GlobalData::sharedDirector()->getUnitPos();
+    
+//    if(eIndex==enUnitIndexMy2)
+//    {
+//        Unit* pUnit = (Unit*)getChildByTag(enUnitIndexMy1);
+//        if(pUnit!=NULL) pUnit->runAction(CCMoveTo::create(1, unitsPos[enUnitIndexMy2]));
+//    }
 }
 
 void UnitsLayer::OnFire(CCNode* pNode,enUnitIndex eTarget)
