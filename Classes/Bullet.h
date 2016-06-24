@@ -40,6 +40,7 @@ public:
     static BulletLayer* CreateBulletLayer();
     void shoot(enUnitIndex shooter,enUnitIndex target, CCPoint shooterPos, CCPoint targetPos);
     void Update(float);
+    void InitBattleField();
 protected:
     bool Init();
     void moveToTargetCallback(CCNode* pObj);

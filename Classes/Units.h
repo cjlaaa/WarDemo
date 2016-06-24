@@ -63,8 +63,11 @@ public:
     void StartGame();
     void StartGameUnitMoveCallback();
     void reposUnit(enUnitIndex eIndex);
+    void checkGameStatus();
+    void InitBattleField();
 protected:
     bool Init();
+    enUnitStatus m_eUnitStatus;
 };
 
 

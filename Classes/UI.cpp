@@ -74,11 +74,40 @@ bool UI::Init()
         
         m_startGame->setScale(0.4);
         m_startGame->setVisible(false);
+        m_eUIGameStatus = enUIGameStatusPre;
         
         return true;
     } while (false);
     CCLog("Function UI::Init Error!");
     return false;
+}
+
+void UI::OnGameOver()
+{
+    m_startGame->setVisible(true);
+    m_eUIGameStatus = enUIGameStatusGameOver;
+}
+
+void UI::InitEnemy()
+{
+    for (int i=enUnitIndexMy1; i<enUnitIndexMax; i++)
+    {
+        if (i<enUnitIndexEnemy1)
+        {
+            //            addUnit(CCRANDOM_0_1()>0.5?enUnitTypeCarMine:enUnitTypeTroopMine, (enUnitIndex)i);
+        }
+        else
+        {
+            addUnit(CCRANDOM_0_1()>0.5?enUnitTypeCarEnemy:enUnitTypeTroopEnemy, (enUnitIndex)i);
+        }
+    }
+    
+//    addUnit(enUnitTypeTroopEnemy, enUnitIndexEnemy1);
+//    addUnit(enUnitTypeTroopEnemy, enUnitIndexEnemy2);
+//    addUnit(enUnitTypeTroopEnemy, enUnitIndexEnemy3);
+//    addUnit(enUnitTypeTroopEnemy, enUnitIndexEnemy4);
+//    addUnit(enUnitTypeCarEnemy, enUnitIndexEnemy5);
+//    addUnit(enUnitTypeCarEnemy, enUnitIndexEnemy6);
 }
 
 void UI::removeUnit(CCNode* pNode)
@@ -115,18 +144,7 @@ void UI::removeUnit(CCNode* pNode)
 void UI::onEnter()
 {
     CCLayer::onEnter();
-    
-    for (int i=enUnitIndexMy1; i<enUnitIndexMax; i++)
-    {
-        if (i<enUnitIndexEnemy1)
-        {
-//            addUnit(CCRANDOM_0_1()>0.5?enUnitTypeCarMine:enUnitTypeTroopMine, (enUnitIndex)i);
-        }
-        else
-        {
-            addUnit(CCRANDOM_0_1()>0.5?enUnitTypeCarEnemy:enUnitTypeTroopEnemy, (enUnitIndex)i);
-        }
-    }
+    InitEnemy();
 }
 
 void UI::addUnit(enUnitType eType,enUnitIndex eIndex)
@@ -144,15 +162,48 @@ SEL_MenuHandler UI::onResolveCCBCCMenuItemSelector(CCObject * pTarget, const cha
 
 void UI::onStartGame(CCObject * pSender)
 {
-    MainScene* pMainScene = (MainScene*)(getParent());
-    pMainScene->OnStartGame();
-    
-    m_startGame->setVisible(false);
-    m_tableViewBg->setVisible(false);
-    CCMenu* pMenu = (CCMenu*)getChildByTag(enTagMenuBF);
-    pMenu->setVisible(false);
-    CCTableView* pT = (CCTableView*)getChildByTag(enTagTableView);
-    pT->setVisible(false);
+    if(m_eUIGameStatus==enUIGameStatusPre)
+    {
+        MainScene* pMainScene = (MainScene*)(getParent());
+        pMainScene->OnStartGame();
+        
+        m_startGame->setVisible(false);
+        m_tableViewBg->setVisible(false);
+        CCMenu* pMenu = (CCMenu*)getChildByTag(enTagMenuBF);
+        pMenu->setVisible(false);
+        CCTableView* pT = (CCTableView*)getChildByTag(enTagTableView);
+        pT->setVisible(false);
+        m_eUIGameStatus = enUIGameStatusGameStart;
+    }
+    else if(m_eUIGameStatus==enUIGameStatusGameOver)
+    {
+        GlobalData::sharedDirector()->setGamePreUnitPos();
+        m_unitData.clear();
+        unitNumMap playerWeaponNum = GlobalData::sharedDirector()->getPlayerUnitNum();
+        unitDataMap unitData = GlobalData::sharedDirector()->getUnitDefaultData();
+        for (unitNumMap::iterator it=playerWeaponNum.begin(); it!=playerWeaponNum.end(); ++it)
+        {
+            m_unitData.push_back(uiUnit(unitData[it->first],it->second));
+        }
+        
+        MainScene* pMainScene = (MainScene*)(getParent());
+        pMainScene->OnInitBattleField();
+        InitEnemy();
+        
+        m_startGame->setVisible(false);
+        m_tableViewBg->setVisible(true);
+        CCMenu* pMenu = (CCMenu*)getChildByTag(enTagMenuBF);
+        pMenu->setVisible(true);
+        CCTableView* pT = (CCTableView*)getChildByTag(enTagTableView);
+        pT->setVisible(true);
+        pT->reloadData();
+        for (int i=enUnitIndexMy1; i<enUnitIndexEnemy1; i++)
+        {
+            m_vecBattleFieldStatus[i] = enUnitTypeNone;
+        }
+        
+        m_eUIGameStatus = enUIGameStatusPre;
+    }
 }
 
 bool UI::onAssignCCBMemberVariable(CCObject * pTarget, const char * pMemberVariableName, CCNode * pNode)

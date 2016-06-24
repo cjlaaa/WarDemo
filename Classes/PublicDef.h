@@ -110,6 +110,7 @@ public:
     virtual bool init(void);
     unitPosMap getUnitPos() {return m_UnitPos;}
     void setGameStartUnitPos();
+    void setGamePreUnitPos();
     unitDataMap getUnitDefaultData() {return m_UnitDefaultData;}
     unitTypeMap getUnitType() {return m_UnitType;}
     void setUnitTypeByIndex(enUnitIndex eIndex, enUnitType eType) {m_UnitType[eIndex] = eType;};

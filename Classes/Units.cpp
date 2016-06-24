@@ -102,7 +102,7 @@ void Unit::Fire()
 {
     enUnitIndex eTarget = getTarget();
     
-    if(eTarget!=enUnitIndexError)
+    if(eTarget!=enUnitIndexMax)
     {
         m_animationManager->runAnimationsForSequenceNamed("fire");
 
@@ -112,7 +112,7 @@ void Unit::Fire()
 
 enUnitIndex Unit::getTarget()
 {
-    enUnitIndex eTarget = enUnitIndexError;
+    enUnitIndex eTarget = enUnitIndexMax;
     
     UnitExpect unitExpect = GlobalData::sharedDirector()->getUnitExpectByIndex(m_eUnitIndex);
     if(GlobalData::sharedDirector()->getUnitTypeByIndex(unitExpect.primary)!=enUnitTypeNone) eTarget=unitExpect.primary;
@@ -145,10 +145,16 @@ bool UnitsLayer::Init()
 {
     do
     {
+        m_eUnitStatus = enUnitStatusPre;
         return true;
     } while (false);
     CCLog("Function UnitsLayer::Init Error!");
     return false;
+}
+
+void UnitsLayer::InitBattleField()
+{
+    removeAllChildren();
 }
 
 void UnitsLayer::StartGame()
@@ -166,6 +172,7 @@ void UnitsLayer::StartGame()
 
 void UnitsLayer::StartGameUnitMoveCallback()
 {
+    m_eUnitStatus = enUnitStatusFight;
     for (int i=0; i<enUnitIndexMax; i++)
     {
         Unit* pU = (Unit*)(getChildByTag(i));
@@ -192,7 +199,65 @@ void UnitsLayer::removeUnit(enUnitIndex eIndex)
     if(pUnit!=NULL)removeChild(pUnit);
     
     GlobalData::sharedDirector()->setUnitTypeByIndex(eIndex, enUnitTypeNone);
-    reposUnit(eIndex);
+    
+    if(m_eUnitStatus==enUnitStatusFight)
+    {
+        reposUnit(eIndex);
+        checkGameStatus();
+    }
+}
+
+void UnitsLayer::checkGameStatus()
+{
+    bool bIsMeWin = true;
+    bool bIsEnemyWin = true;
+    
+    for (int i=0; i<enUnitIndexEnemy1; i++)
+    {
+        if(GlobalData::sharedDirector()->getUnitTypeByIndex((enUnitIndex)i)!=enUnitTypeNone)
+        {
+            bIsMeWin = false;
+        }
+    }
+    
+    for (int i=enUnitIndexEnemy1; i<enUnitIndexMax; i++)
+    {
+        if(GlobalData::sharedDirector()->getUnitTypeByIndex((enUnitIndex)i)!=enUnitTypeNone)
+        {
+            bIsEnemyWin = false;
+        }
+    }
+    
+    if(bIsMeWin||bIsEnemyWin)
+    {
+        m_eUnitStatus = enUnitStatusPre;
+        ((MainScene*)(getParent()))->OnGameOver();
+    }
+}
+
+void UnitsLayer::OnFire(CCNode* pNode,enUnitIndex eTarget)
+{
+    ((MainScene*)(getParent()))->OnFire((enUnitIndex)(pNode->getTag()), eTarget, pNode->getPosition(),(getChildByTag(eTarget)->getPosition()));
+}
+
+void UnitsLayer::OnHit(enUnitIndex shooter, enUnitIndex target)
+{
+    Unit* pU = (Unit*)getChildByTag(target);
+    if(pU!=NULL)pU->OnHit(shooter);
+}
+
+void UnitsLayer::OnDead(enUnitIndex target)
+{
+    ((MainScene*)(getParent()))->OnDead(target,((Unit*)getChildByTag(target))->getPosition());
+}
+
+void UnitsLayer::Update(float fT)
+{
+    for (int i=0; i<enUnitIndexMax; i++)
+    {
+        Unit* pU = (Unit*)(getChildByTag(i));
+        if(pU!=NULL)pU->Update(fT);
+    }
 }
 
 void UnitsLayer::reposUnit(enUnitIndex eIndex)
@@ -227,30 +292,5 @@ void UnitsLayer::reposUnit(enUnitIndex eIndex)
         
         Unit* pUnit2 = (Unit*)getChildByTag(eIndex+2);
         if(pUnit2!=NULL) pUnit2->runAction(CCMoveTo::create(1, unitsPos[(enUnitIndex)(eIndex+1)]));
-    }
-}
-
-void UnitsLayer::OnFire(CCNode* pNode,enUnitIndex eTarget)
-{
-    ((MainScene*)(getParent()))->OnFire((enUnitIndex)(pNode->getTag()), eTarget, pNode->getPosition(),(getChildByTag(eTarget)->getPosition()));
-}
-
-void UnitsLayer::OnHit(enUnitIndex shooter, enUnitIndex target)
-{
-    Unit* pU = (Unit*)getChildByTag(target);
-    if(pU!=NULL)pU->OnHit(shooter);
-}
-
-void UnitsLayer::OnDead(enUnitIndex target)
-{
-    ((MainScene*)(getParent()))->OnDead(target,((Unit*)getChildByTag(target))->getPosition());
-}
-
-void UnitsLayer::Update(float fT)
-{
-    for (int i=0; i<enUnitIndexMax; i++)
-    {
-        Unit* pU = (Unit*)(getChildByTag(i));
-        if(pU!=NULL)pU->Update(fT);
     }
 }

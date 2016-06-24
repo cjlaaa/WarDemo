@@ -36,6 +36,23 @@ void GlobalData::setGameStartUnitPos()
     m_UnitPos[enUnitIndexEnemy6] = ccp(SCREEN_WIDTH*0.876,SCREEN_HEIGHT*0.341);
 }
 
+void GlobalData::setGamePreUnitPos()
+{
+    m_UnitPos[enUnitIndexMy1] = ccp(SCREEN_WIDTH*0.112,SCREEN_HEIGHT*0.693);
+    m_UnitPos[enUnitIndexMy2] = ccp(SCREEN_WIDTH*0.137,SCREEN_HEIGHT*0.579);
+    m_UnitPos[enUnitIndexMy3] = ccp(SCREEN_WIDTH*0.174,SCREEN_HEIGHT*0.484);
+    m_UnitPos[enUnitIndexMy4] = ccp(SCREEN_WIDTH*0.235,SCREEN_HEIGHT*0.390);
+    m_UnitPos[enUnitIndexMy5] = ccp(SCREEN_WIDTH*0.320,SCREEN_HEIGHT*0.323);
+    m_UnitPos[enUnitIndexMy6] = ccp(SCREEN_WIDTH*0.428,SCREEN_HEIGHT*0.285);
+    
+    m_UnitPos[enUnitIndexEnemy1] = ccp(SCREEN_WIDTH*0.570,SCREEN_HEIGHT*0.767);
+    m_UnitPos[enUnitIndexEnemy2] = ccp(SCREEN_WIDTH*0.679,SCREEN_HEIGHT*0.738);
+    m_UnitPos[enUnitIndexEnemy3] = ccp(SCREEN_WIDTH*0.777,SCREEN_HEIGHT*0.700);
+    m_UnitPos[enUnitIndexEnemy4] = ccp(SCREEN_WIDTH*0.845,SCREEN_HEIGHT*0.627);
+    m_UnitPos[enUnitIndexEnemy5] = ccp(SCREEN_WIDTH*0.871,SCREEN_HEIGHT*0.500);
+    m_UnitPos[enUnitIndexEnemy6] = ccp(SCREEN_WIDTH*0.865,SCREEN_HEIGHT*0.360);
+}
+
 bool GlobalData::init()
 {
     m_UnitPos.insert(pair<enUnitIndex,CCPoint>(enUnitIndexMy1,ccp(SCREEN_WIDTH*0.112,SCREEN_HEIGHT*0.693)));
@@ -57,19 +74,19 @@ bool GlobalData::init()
     m_UnitDefaultData.insert(pair<enUnitType,UnitData>(enUnitTypeCarMine,
                                                        UnitData("ccb/car1.ccbi",
                                                                 "ccbResources/cars/1/ID_235_01.png",
-                                                                enUnitTypeCarMine,50,5,50)));
+                                                                enUnitTypeCarMine,50,10,50)));
     m_UnitDefaultData.insert(pair<enUnitType,UnitData>(enUnitTypeCarEnemy,
                                                        UnitData("ccb/car2.ccbi",
                                                                 "ccbResources/cars/1/ID_236_01.png",
-                                                                enUnitTypeCarEnemy,50,5,50)));
+                                                                enUnitTypeCarEnemy,50,10,50)));
     m_UnitDefaultData.insert(pair<enUnitType,UnitData>(enUnitTypeTroopMine,
                                                        UnitData("ccb/troop1.ccbi",
                                                                 "ccbResources/troop/2/001.png",
-                                                                enUnitTypeTroopMine,30,3,100)));
+                                                                enUnitTypeTroopMine,30,5,100)));
     m_UnitDefaultData.insert(pair<enUnitType,UnitData>(enUnitTypeTroopEnemy,
                                                        UnitData("ccb/troop2.ccbi",
                                                                 "ccbResources/troop/1/ID_257_TRIMd-1.png",
-                                                                enUnitTypeTroopEnemy,30,3,100)));
+                                                                enUnitTypeTroopEnemy,30,5,100)));
     
     m_PlayerUnitNum.insert(pair<enUnitType,int>(enUnitTypeCarMine,6));
     m_PlayerUnitNum.insert(pair<enUnitType,int>(enUnitTypeTroopMine,6));

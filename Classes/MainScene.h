@@ -25,6 +25,8 @@ public:
     void addUnit(enUnitType eType,enUnitIndex eIndex);
     void removeUnit(enUnitIndex eIndex);
     void OnStartGame();
+    void OnGameOver();
+    void OnInitBattleField();
 private:
     void Update(float);
 };

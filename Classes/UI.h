@@ -23,6 +23,13 @@ enum
     enTagInCellTexture,
 };
 
+enum enUIGameStatus
+{
+    enUIGameStatusPre,
+    enUIGameStatusGameStart,
+    enUIGameStatusGameOver,
+};
+
 struct uiUnit
 {
     uiUnit(UnitData data, int num)
@@ -45,6 +52,7 @@ class UI : public CCLayer
 {
 public:
     static UI* CreateUI();
+    void OnGameOver();
     
     virtual cocos2d::SEL_MenuHandler onResolveCCBCCMenuItemSelector(cocos2d::CCObject * pTarget, const char * pSelectorName);
     virtual cocos2d::extension::SEL_CCControlHandler onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char * pSelectorName){};
@@ -63,6 +71,7 @@ public:
     void tableViewSubBtnCallback(CCObject* pSender);
 protected:
     bool Init();
+    void InitEnemy();
     void onEnter();
     void addUnit(enUnitType eType,enUnitIndex eIndex);
     void removeUnit(CCNode* pNode);
@@ -71,6 +80,7 @@ protected:
     CCMenuItemImage* m_startGame;
     uiUnitVector m_unitData;
     vector<enUnitType> m_vecBattleFieldStatus;
+    enUIGameStatus m_eUIGameStatus;
 };
 
 #endif /* UI_hpp */

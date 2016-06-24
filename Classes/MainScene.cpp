@@ -88,6 +88,21 @@ void MainScene::OnStartGame()
     pUnitLayer->StartGame();
 }
 
+void MainScene::OnGameOver()
+{
+    UI* ui = (UI*)getChildByTag(enTagUI);
+    ui->OnGameOver();
+}
+
+void MainScene::OnInitBattleField()
+{
+    BulletLayer* pBulletLayer = (BulletLayer*)(getChildByTag(enTagBullet));
+    pBulletLayer->InitBattleField();
+    
+    UnitsLayer* pUnitLayer = (UnitsLayer*)(getChildByTag(enTagUnitsLayer));
+    pUnitLayer->InitBattleField();
+}
+
 void MainScene::menuCloseCallback(CCObject* pSender)
 {
     CCDirector::sharedDirector()->end();

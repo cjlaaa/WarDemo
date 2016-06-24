@@ -94,6 +94,14 @@ void BulletLayer::Update(float)
     
 }
 
+void BulletLayer::InitBattleField()
+{
+    CCClippingNode * clippingNodeLeft = (CCClippingNode*)(getChildByTag(enTagClippingNodeLeft));
+    clippingNodeLeft->removeAllChildren();
+    CCClippingNode * clippingNodeRight = (CCClippingNode*)(getChildByTag(enTagClippingNodeRight));
+    clippingNodeRight->removeAllChildren();
+}
+
 void BulletLayer::shoot(enUnitIndex shooter,enUnitIndex target, CCPoint shooterPos, CCPoint targetPos)
 {
 //    unitPosMap unitPos = GlobalData::sharedDirector()->getUnitPos();
