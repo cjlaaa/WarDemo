@@ -1,3 +1,10 @@
 proj.ios/DerivedData
 proj.ios/WarDemo.xcodeproj/project.xcworkspace
 proj.ios/WarDemo.xcodeproj/xcuserdata
+.idea
+out
+proj.android/assets
+proj.android/gen
+proj.android/libs
+proj.android/obj
+proj.android.iml
