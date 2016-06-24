@@ -9,7 +9,7 @@
 #include "Units.h"
 #include "MainScene.h"
 
-Unit* Unit::CreateUnit(enUnitType eType,enUnitIndex eIndex)
+Unit* Unit::CreateUnit(enUnitType eType, enUnitIndex eIndex)
 {
     do
     {
@@ -25,7 +25,7 @@ Unit* Unit::CreateUnit(enUnitType eType,enUnitIndex eIndex)
     return NULL;
 }
 
-bool Unit::Init(enUnitType eType,enUnitIndex eIndex)
+bool Unit::Init(enUnitType eType, enUnitIndex eIndex)
 {
     do
     {
@@ -64,7 +64,7 @@ void Unit::Update(float fT)
         }
         else
         {
-            m_nFireCd -= CCRANDOM_0_1()*10;
+            m_nFireCd -= 1 + CCRANDOM_0_1()*2;
         }
     }
 }
@@ -92,7 +92,7 @@ void Unit::OnHit(enUnitIndex shooter)
     if(m_nHp<=0)
     {
         ((UnitsLayer*)(getParent()))->OnDead(m_eUnitIndex);
-        removeFromParent();
+        ((UnitsLayer*)(getParent()))->removeUnit(m_eUnitIndex);
     }
     
 //    CCLog("%d %d",m_eUnitIndex,m_nHp);
@@ -100,31 +100,28 @@ void Unit::OnHit(enUnitIndex shooter)
 
 void Unit::Fire()
 {
-    m_animationManager->runAnimationsForSequenceNamed("fire");
-    enUnitIndex eTarget;
+    enUnitIndex eTarget = getTarget();
     
-    if(m_nTag < enUnitIndexEnemy1)
+    if(eTarget!=enUnitIndexError)
     {
-//        eTarget = (enTagUnit)(m_nTag + 5);
-        
-        if(CCRANDOM_0_1()<0.2) eTarget = enUnitIndexEnemy1;
-        else if(CCRANDOM_0_1()<0.4) eTarget = enUnitIndexEnemy2;
-        else if(CCRANDOM_0_1()<0.6) eTarget = enUnitIndexEnemy3;
-        else if(CCRANDOM_0_1()<0.8) eTarget = enUnitIndexEnemy4;
-        else eTarget = enUnitIndexEnemy5;
+        m_animationManager->runAnimationsForSequenceNamed("fire");
+
+        ((UnitsLayer*)(getParent()))->OnFire(this,eTarget);
     }
-    else
-    {
-//        eTarget = (enTagUnit)(m_nTag - 5);
-        
-        if(CCRANDOM_0_1()<0.2) eTarget = enUnitIndexMy1;
-        else if(CCRANDOM_0_1()<0.4) eTarget = enUnitIndexMy2;
-        else if(CCRANDOM_0_1()<0.6) eTarget = enUnitIndexMy3;
-        else if(CCRANDOM_0_1()<0.8) eTarget = enUnitIndexMy4;
-        else eTarget = enUnitIndexMy5;
-    }
+}
+
+enUnitIndex Unit::getTarget()
+{
+    enUnitIndex eTarget = enUnitIndexError;
     
-    ((UnitsLayer*)(getParent()))->OnFire(this,eTarget);
+    UnitExpect unitExpect = GlobalData::sharedDirector()->getUnitExpectByIndex(m_eUnitIndex);
+    if(GlobalData::sharedDirector()->getUnitTypeByIndex(unitExpect.primary)!=enUnitTypeNone) eTarget=unitExpect.primary;
+    else if(GlobalData::sharedDirector()->getUnitTypeByIndex(unitExpect.secondary)!=enUnitTypeNone) eTarget=unitExpect.secondary;
+    else if(GlobalData::sharedDirector()->getUnitTypeByIndex(unitExpect.third)!=enUnitTypeNone) eTarget=unitExpect.third;
+    else if(GlobalData::sharedDirector()->getUnitTypeByIndex(unitExpect.fourth)!=enUnitTypeNone) eTarget=unitExpect.fourth;
+    else if(GlobalData::sharedDirector()->getUnitTypeByIndex(unitExpect.fifth)!=enUnitTypeNone) eTarget=unitExpect.fifth;
+    
+    return eTarget;
 }
 
 UnitsLayer* UnitsLayer::CreateUnitsLayer()
@@ -155,6 +152,19 @@ bool UnitsLayer::Init()
 
 void UnitsLayer::StartGame()
 {
+    GlobalData::sharedDirector()->setGameStartUnitPos();
+    unitPosMap unitPos = GlobalData::sharedDirector()->getUnitPos();
+    
+    for (int i=0; i<enUnitIndexEnemy1; i++)
+    {
+        Unit* pU = (Unit*)(getChildByTag(i));
+        if(pU!=NULL)pU->runAction(CCSequence::create(CCMoveTo::create(1, unitPos[(enUnitIndex)i]),
+                                                     CCCallFunc::create(this, callfunc_selector(UnitsLayer::StartGameUnitMoveCallback))));
+    }
+}
+
+void UnitsLayer::StartGameUnitMoveCallback()
+{
     for (int i=0; i<enUnitIndexMax; i++)
     {
         Unit* pU = (Unit*)(getChildByTag(i));
@@ -170,7 +180,7 @@ void UnitsLayer::addUnit(enUnitType eType,enUnitIndex eIndex)
     enUnitType eUnitType = eType;
     Unit* pUnit = Unit::CreateUnit(eUnitType,eIndex);
     pUnit->setPosition(unitsPos[eIndex]);
-    addChild(pUnit,enZOrderFront,enUnitIndexMy1+eIndex);
+    addChild(pUnit,enZOrderFront,eIndex);
     
     GlobalData::sharedDirector()->setUnitTypeByIndex(eIndex, eType);
 }
@@ -179,6 +189,8 @@ void UnitsLayer::removeUnit(enUnitIndex eIndex)
 {
     Unit* pUnit = (Unit*)getChildByTag(eIndex);
     if(pUnit!=NULL)removeChild(pUnit);
+    
+    GlobalData::sharedDirector()->setUnitTypeByIndex(eIndex, enUnitTypeNone);
 }
 
 void UnitsLayer::OnFire(CCNode* pNode,enUnitIndex eTarget)

@@ -46,7 +46,7 @@ bool UI::Init()
         CCArray* pBtnArray = CCArray::create();
         for (int i=enUnitIndexMy1; i<enUnitIndexEnemy1; i++)
         {
-            m_vecBattleFieldStatus.push_back(enUnitTypeError);
+            m_vecBattleFieldStatus.push_back(enUnitTypeNone);
             CCMenuItemImage *pBtn = CCMenuItemImage::create("CloseNormal.png",
                                                                   "CloseSelected.png",
                                                                   this,
@@ -96,14 +96,14 @@ void UI::removeUnit(CCNode* pNode)
         }
     }
     
-    m_vecBattleFieldStatus[index] = enUnitTypeError;
+    m_vecBattleFieldStatus[index] = enUnitTypeNone;
     CCTableView* pList = (CCTableView*)getChildByTag(enTagTableView);
     pList->reloadData();
     
     bool bIsShowBtn = false;
     for (int i=0; i<m_vecBattleFieldStatus.size(); i++)
     {
-        if(m_vecBattleFieldStatus[i]!=enUnitTypeError)
+        if(m_vecBattleFieldStatus[i]!=enUnitTypeNone)
         {
             bIsShowBtn = true;
             break;
@@ -170,7 +170,7 @@ void UI::tableCellTouched(CCTableView* table, CCTableViewCell* cell)
         int nIndex = -1;
         for (int i=0; i<m_vecBattleFieldStatus.size(); i++)
         {
-            if(m_vecBattleFieldStatus[i]==enUnitTypeError)
+            if(m_vecBattleFieldStatus[i]==enUnitTypeNone)
             {
                 nIndex = i;
                 break;

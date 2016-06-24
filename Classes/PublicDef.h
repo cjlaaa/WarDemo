@@ -20,7 +20,7 @@ using namespace std;
 
 enum enUnitType
 {
-    enUnitTypeError = -1,
+    enUnitTypeNone = -1,
     enUnitTypeCarMine,
     enUnitTypeCarEnemy,
     enUnitTypeTroopMine,
@@ -49,7 +49,7 @@ struct UnitData
     {
         strCCBI = "";
         strTexture = "";
-        eType = enUnitTypeError;
+        eType = enUnitTypeNone;
         nHp = 0;
         nDC = 0;
         nFireCD = 0;
@@ -73,26 +73,51 @@ struct UnitData
     int nFireCD;
 };
 
+struct UnitExpect
+{
+    UnitExpect()
+    {
+    }
+    UnitExpect(enUnitIndex ePrimary,enUnitIndex eSecondary,enUnitIndex eThird,enUnitIndex eFourth, enUnitIndex eFifth)
+    {
+        primary = ePrimary;
+        secondary = eSecondary;
+        third = eThird;
+        fourth = eFourth;
+        fifth = eFifth;
+    }
+    
+    enUnitIndex primary;
+    enUnitIndex secondary;
+    enUnitIndex third;
+    enUnitIndex fourth;
+    enUnitIndex fifth;
+};
+
 typedef map<enUnitIndex,CCPoint> unitPosMap;
 typedef map<enUnitType,UnitData> unitDataMap;
 typedef map<enUnitIndex,enUnitType> unitTypeMap;
 typedef map<enUnitType,int> unitNumMap;
+typedef map<enUnitIndex,UnitExpect> unitExpectMap;
 class GlobalData
 {
 public:
     static GlobalData* sharedDirector(void);
     virtual bool init(void);
     unitPosMap getUnitPos() {return m_UnitPos;}
+    void setGameStartUnitPos();
     unitDataMap getUnitDefaultData() {return m_UnitDefaultData;}
     unitTypeMap getUnitType() {return m_UnitType;}
     void setUnitTypeByIndex(enUnitIndex eIndex, enUnitType eType) {m_UnitType[eIndex] = eType;};
     enUnitType getUnitTypeByIndex(enUnitIndex eIndex) {return m_UnitType[eIndex];}
     unitNumMap getPlayerUnitNum() {return m_PlayerUnitNum;}
+    UnitExpect getUnitExpectByIndex(enUnitIndex eIndex){return m_UnitExpect[eIndex];}
 private:
     unitTypeMap m_UnitType;
     unitPosMap m_UnitPos;
     unitDataMap m_UnitDefaultData;
     unitNumMap m_PlayerUnitNum;
+    unitExpectMap m_UnitExpect;
 };
 
 enum
