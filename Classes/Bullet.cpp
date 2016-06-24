@@ -94,16 +94,16 @@ void BulletLayer::Update(float)
     
 }
 
-void BulletLayer::shoot(enUnitIndex shooter,enUnitIndex target)
+void BulletLayer::shoot(enUnitIndex shooter,enUnitIndex target, CCPoint shooterPos, CCPoint targetPos)
 {
-    unitPosMap unitPos = GlobalData::sharedDirector()->getUnitPos();
+//    unitPosMap unitPos = GlobalData::sharedDirector()->getUnitPos();
     float fBulletRunTime = 0.5;
     CCClippingNode * clippingNodeLeft = (CCClippingNode*)(getChildByTag(enTagClippingNodeLeft));
     CCClippingNode * clippingNodeRight = (CCClippingNode*)(getChildByTag(enTagClippingNodeRight));
     
     //begin
     Bullet* pBulletLeft = Bullet::CreateBullet();
-    pBulletLeft->setPosition(unitPos[shooter]);
+    pBulletLeft->setPosition(shooterPos);
     CCPoint ccpTarget;
     if(shooter < enUnitIndexEnemy1) ccpTarget=ccp(SCREEN_WIDTH,SCREEN_HEIGHT);
     else ccpTarget = ccp(0,0);
@@ -115,11 +115,13 @@ void BulletLayer::shoot(enUnitIndex shooter,enUnitIndex target)
     ShootData* pData = new ShootData;
     pData->shooter = shooter;
     pData->target = target;
+    pData->shooterPos = shooterPos;
+    pData->targetPos = targetPos;
     
     //end
     Bullet* pBulletRight = Bullet::CreateBullet();
     pBulletRight->runAction(CCSequence::create(CCDelayTime::create(3.f),
-                                               CCMoveTo::create(fBulletRunTime, unitPos[target]),
+                                               CCMoveTo::create(fBulletRunTime, targetPos),
                                                CCCallFuncN::create(pBulletRight, callfuncN_selector(BulletLayer::moveToTargetCallback)),
                                                CCCallFuncND::create(this, callfuncND_selector(BulletLayer::OnHit),(void*)pData),
                                                NULL));
@@ -147,7 +149,7 @@ void BulletLayer::OnHit(CCNode* pNode,void* pData)
     ShootData* pShootData = (ShootData*)pData;
     
     MainScene* pMainScene = (MainScene*)(getParent());
-    pMainScene->OnHit(pShootData->shooter,pShootData->target);
+    pMainScene->OnHit(pShootData->shooter,pShootData->target,pShootData->targetPos);
     
     delete pShootData;
     pShootData = NULL;

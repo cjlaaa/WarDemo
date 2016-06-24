@@ -30,13 +30,15 @@ struct ShootData
 {
     enUnitIndex shooter;
     enUnitIndex target;
+    CCPoint shooterPos;
+    CCPoint targetPos;
 };
 
 class BulletLayer : public CCLayer
 {
 public:
     static BulletLayer* CreateBulletLayer();
-    void shoot(enUnitIndex shooter,enUnitIndex target);
+    void shoot(enUnitIndex shooter,enUnitIndex target, CCPoint shooterPos, CCPoint targetPos);
     void Update(float);
 protected:
     bool Init();

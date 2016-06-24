@@ -192,23 +192,47 @@ void UnitsLayer::removeUnit(enUnitIndex eIndex)
     if(pUnit!=NULL)removeChild(pUnit);
     
     GlobalData::sharedDirector()->setUnitTypeByIndex(eIndex, enUnitTypeNone);
-//    reposUnit(eIndex);
+    reposUnit(eIndex);
 }
 
 void UnitsLayer::reposUnit(enUnitIndex eIndex)
 {
     unitPosMap unitsPos = GlobalData::sharedDirector()->getUnitPos();
     
-//    if(eIndex==enUnitIndexMy2)
-//    {
-//        Unit* pUnit = (Unit*)getChildByTag(enUnitIndexMy1);
-//        if(pUnit!=NULL) pUnit->runAction(CCMoveTo::create(1, unitsPos[enUnitIndexMy2]));
-//    }
+    if(eIndex==enUnitIndexMy2 || eIndex==enUnitIndexEnemy2)
+    {
+        Unit* pUnit = (Unit*)getChildByTag(eIndex-1);
+        if(pUnit!=NULL) pUnit->runAction(CCMoveTo::create(1, unitsPos[eIndex]));
+    }
+    
+    if(eIndex==enUnitIndexMy3 || eIndex==enUnitIndexEnemy3)
+    {
+        Unit* pUnit1 = (Unit*)getChildByTag(eIndex-1);
+        if(pUnit1!=NULL) pUnit1->runAction(CCMoveTo::create(1, unitsPos[eIndex]));
+        
+        Unit* pUnit2 = (Unit*)getChildByTag(eIndex-2);
+        if(pUnit2!=NULL) pUnit2->runAction(CCMoveTo::create(1, unitsPos[(enUnitIndex)(eIndex-1)]));
+    }
+    
+    if(eIndex==enUnitIndexMy5 || eIndex==enUnitIndexEnemy5)
+    {
+        Unit* pUnit = (Unit*)getChildByTag(eIndex+1);
+        if(pUnit!=NULL) pUnit->runAction(CCMoveTo::create(1, unitsPos[eIndex]));
+    }
+    
+    if(eIndex==enUnitIndexMy4 || eIndex==enUnitIndexEnemy4)
+    {
+        Unit* pUnit1 = (Unit*)getChildByTag(eIndex+1);
+        if(pUnit1!=NULL) pUnit1->runAction(CCMoveTo::create(1, unitsPos[eIndex]));
+        
+        Unit* pUnit2 = (Unit*)getChildByTag(eIndex+2);
+        if(pUnit2!=NULL) pUnit2->runAction(CCMoveTo::create(1, unitsPos[(enUnitIndex)(eIndex+1)]));
+    }
 }
 
 void UnitsLayer::OnFire(CCNode* pNode,enUnitIndex eTarget)
 {
-    ((MainScene*)(getParent()))->OnFire((enUnitIndex)(pNode->getTag()), eTarget);
+    ((MainScene*)(getParent()))->OnFire((enUnitIndex)(pNode->getTag()), eTarget, pNode->getPosition(),(getChildByTag(eTarget)->getPosition()));
 }
 
 void UnitsLayer::OnHit(enUnitIndex shooter, enUnitIndex target)
@@ -219,7 +243,7 @@ void UnitsLayer::OnHit(enUnitIndex shooter, enUnitIndex target)
 
 void UnitsLayer::OnDead(enUnitIndex target)
 {
-    ((MainScene*)(getParent()))->OnDead(target);
+    ((MainScene*)(getParent()))->OnDead(target,((Unit*)getChildByTag(target))->getPosition());
 }
 
 void UnitsLayer::Update(float fT)

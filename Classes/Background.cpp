@@ -93,31 +93,31 @@ void Background::onExit()
     m_CraterArrayRightDeleted->release();
 }
 
-void Background::OnHit(enUnitIndex target)
+void Background::OnHit(enUnitIndex target,CCPoint targetPos)
 {
-    unitPosMap unitsPos = GlobalData::sharedDirector()->getUnitPos();
+//    unitPosMap unitsPos = GlobalData::sharedDirector()->getUnitPos();
     
     CCSprite* pCrater = CCSprite::create("keng.png");
     pCrater->setScale(0.3);
     if(target<enUnitIndexEnemy1)
     {
         m_backgroundLeft->addChild(pCrater);
-        pCrater->setPosition(m_backgroundLeft->convertToNodeSpace(unitsPos[target]));
+        pCrater->setPosition(m_backgroundLeft->convertToNodeSpace(targetPos));
         m_CraterArrayLeft->addObject(pCrater);
     }
     else
     {
         m_backgroundRight->addChild(pCrater);
-        pCrater->setPosition(m_backgroundRight->convertToNodeSpace(unitsPos[target]));
+        pCrater->setPosition(m_backgroundRight->convertToNodeSpace(targetPos));
         m_CraterArrayRight->addObject(pCrater);
     }
 }
 
-void Background::OnDead(enUnitIndex target)
+void Background::OnDead(enUnitIndex target, CCPoint targetPos)
 {
     enUnitType eType = GlobalData::sharedDirector()->getUnitTypeByIndex(target);
     unitDataMap unitData = GlobalData::sharedDirector()->getUnitDefaultData();
-    unitPosMap unitsPos = GlobalData::sharedDirector()->getUnitPos();
+//    unitPosMap unitsPos = GlobalData::sharedDirector()->getUnitPos();
     
     if(eType==enUnitTypeTroopMine ||
        eType==enUnitTypeTroopEnemy)
@@ -133,13 +133,13 @@ void Background::OnDead(enUnitIndex target)
         if(target<enUnitIndexEnemy1)
         {
             m_backgroundLeft->addChild(ccbNode);
-            ccbNode->setPosition(m_backgroundLeft->convertToNodeSpace(unitsPos[target]));
+            ccbNode->setPosition(m_backgroundLeft->convertToNodeSpace(targetPos));
             m_CraterArrayLeft->addObject(ccbNode);
         }
         else
         {
             m_backgroundRight->addChild(ccbNode);
-            ccbNode->setPosition(m_backgroundRight->convertToNodeSpace(unitsPos[target]));
+            ccbNode->setPosition(m_backgroundRight->convertToNodeSpace(targetPos));
             m_CraterArrayRight->addObject(ccbNode);
         }
     }
@@ -157,13 +157,13 @@ void Background::OnDead(enUnitIndex target)
         if(target<enUnitIndexEnemy1)
         {
             m_backgroundLeft->addChild(ccbNode);
-            ccbNode->setPosition(m_backgroundLeft->convertToNodeSpace(unitsPos[target]));
+            ccbNode->setPosition(m_backgroundLeft->convertToNodeSpace(targetPos));
             m_CraterArrayLeft->addObject(ccbNode);
         }
         else
         {
             m_backgroundRight->addChild(ccbNode);
-            ccbNode->setPosition(m_backgroundRight->convertToNodeSpace(unitsPos[target]));
+            ccbNode->setPosition(m_backgroundRight->convertToNodeSpace(targetPos));
             m_CraterArrayRight->addObject(ccbNode);
         }
     }

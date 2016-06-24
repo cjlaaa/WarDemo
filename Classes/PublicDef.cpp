@@ -57,19 +57,19 @@ bool GlobalData::init()
     m_UnitDefaultData.insert(pair<enUnitType,UnitData>(enUnitTypeCarMine,
                                                        UnitData("ccb/car1.ccbi",
                                                                 "ccbResources/cars/1/ID_235_01.png",
-                                                                enUnitTypeCarMine,50,3,50)));
+                                                                enUnitTypeCarMine,50,5,50)));
     m_UnitDefaultData.insert(pair<enUnitType,UnitData>(enUnitTypeCarEnemy,
                                                        UnitData("ccb/car2.ccbi",
                                                                 "ccbResources/cars/1/ID_236_01.png",
-                                                                enUnitTypeCarEnemy,50,3,50)));
+                                                                enUnitTypeCarEnemy,50,5,50)));
     m_UnitDefaultData.insert(pair<enUnitType,UnitData>(enUnitTypeTroopMine,
                                                        UnitData("ccb/troop1.ccbi",
                                                                 "ccbResources/troop/2/001.png",
-                                                                enUnitTypeTroopMine,30,1,100)));
+                                                                enUnitTypeTroopMine,30,3,100)));
     m_UnitDefaultData.insert(pair<enUnitType,UnitData>(enUnitTypeTroopEnemy,
                                                        UnitData("ccb/troop2.ccbi",
                                                                 "ccbResources/troop/1/ID_257_TRIMd-1.png",
-                                                                enUnitTypeTroopEnemy,30,1,100)));
+                                                                enUnitTypeTroopEnemy,30,3,100)));
     
     m_PlayerUnitNum.insert(pair<enUnitType,int>(enUnitTypeCarMine,6));
     m_PlayerUnitNum.insert(pair<enUnitType,int>(enUnitTypeTroopMine,6));

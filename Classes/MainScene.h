@@ -19,9 +19,9 @@ public:
     void menuCloseCallback(CCObject* pSender);
     CREATE_FUNC(MainScene);
     
-    void OnFire(enUnitIndex shooter, enUnitIndex target);
-    void OnHit(enUnitIndex shooter, enUnitIndex target);
-    void OnDead(enUnitIndex target);
+    void OnFire(enUnitIndex shooter, enUnitIndex target, CCPoint shooterPos, CCPoint targetPos);
+    void OnHit(enUnitIndex shooter, enUnitIndex target, CCPoint targetPos);
+    void OnDead(enUnitIndex target, CCPoint targetPos);
     void addUnit(enUnitType eType,enUnitIndex eIndex);
     void removeUnit(enUnitIndex eIndex);
     void OnStartGame();
