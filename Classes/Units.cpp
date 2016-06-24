@@ -266,31 +266,97 @@ void UnitsLayer::reposUnit(enUnitIndex eIndex)
     
     if(eIndex==enUnitIndexMy2 || eIndex==enUnitIndexEnemy2)
     {
-        Unit* pUnit = (Unit*)getChildByTag(eIndex-1);
-        if(pUnit!=NULL) pUnit->runAction(CCMoveTo::create(1, unitsPos[eIndex]));
+        if((Unit*)getChildByTag(eIndex+1)!=NULL)
+        {
+            Unit* pUnit = (Unit*)getChildByTag(eIndex-1);
+            if(pUnit!=NULL)
+            {
+                pUnit->stopAllActions();
+                pUnit->runAction(CCMoveTo::create(1, unitsPos[eIndex]));
+            }
+        }
+        else
+        {
+            Unit* pUnit = (Unit*)getChildByTag(eIndex-1);
+            if(pUnit!=NULL)
+            {
+                pUnit->stopAllActions();
+                pUnit->runAction(CCMoveTo::create(1, unitsPos[(enUnitIndex)(eIndex+1)]));
+            }
+        }
     }
     
     if(eIndex==enUnitIndexMy3 || eIndex==enUnitIndexEnemy3)
     {
         Unit* pUnit1 = (Unit*)getChildByTag(eIndex-1);
-        if(pUnit1!=NULL) pUnit1->runAction(CCMoveTo::create(1, unitsPos[eIndex]));
-        
-        Unit* pUnit2 = (Unit*)getChildByTag(eIndex-2);
-        if(pUnit2!=NULL) pUnit2->runAction(CCMoveTo::create(1, unitsPos[(enUnitIndex)(eIndex-1)]));
+        if(pUnit1!=NULL)
+        {
+            pUnit1->stopAllActions();
+            pUnit1->runAction(CCMoveTo::create(1, unitsPos[eIndex]));
+            
+            Unit* pUnit2 = (Unit*)getChildByTag(eIndex-2);
+            if(pUnit2!=NULL)
+            {
+                pUnit2->stopAllActions();
+                pUnit2->runAction(CCMoveTo::create(1, unitsPos[(enUnitIndex)(eIndex-1)]));
+            }
+        }
+        else
+        {
+            Unit* pUnit = (Unit*)getChildByTag(eIndex-2);
+            if(pUnit!=NULL)
+            {
+                pUnit->stopAllActions();
+                pUnit->runAction(CCMoveTo::create(1, unitsPos[(enUnitIndex)(eIndex)]));
+            }
+        }
     }
     
     if(eIndex==enUnitIndexMy5 || eIndex==enUnitIndexEnemy5)
     {
-        Unit* pUnit = (Unit*)getChildByTag(eIndex+1);
-        if(pUnit!=NULL) pUnit->runAction(CCMoveTo::create(1, unitsPos[eIndex]));
+        if((Unit*)getChildByTag(eIndex-1)!=NULL)
+        {
+            Unit* pUnit = (Unit*)getChildByTag(eIndex+1);
+            if(pUnit!=NULL)
+            {
+                pUnit->stopAllActions();
+                pUnit->runAction(CCMoveTo::create(1, unitsPos[eIndex]));
+            }
+        }
+        else
+        {
+            Unit* pUnit = (Unit*)getChildByTag(eIndex+1);
+            if(pUnit!=NULL)
+            {
+                pUnit->stopAllActions();
+                pUnit->runAction(CCMoveTo::create(1, unitsPos[(enUnitIndex)(eIndex-1)]));
+            }
+        }
     }
     
     if(eIndex==enUnitIndexMy4 || eIndex==enUnitIndexEnemy4)
     {
         Unit* pUnit1 = (Unit*)getChildByTag(eIndex+1);
-        if(pUnit1!=NULL) pUnit1->runAction(CCMoveTo::create(1, unitsPos[eIndex]));
-        
-        Unit* pUnit2 = (Unit*)getChildByTag(eIndex+2);
-        if(pUnit2!=NULL) pUnit2->runAction(CCMoveTo::create(1, unitsPos[(enUnitIndex)(eIndex+1)]));
+        if(pUnit1!=NULL)
+        {
+            pUnit1->stopAllActions();
+            pUnit1->runAction(CCMoveTo::create(1, unitsPos[eIndex]));
+            
+            Unit* pUnit2 = (Unit*)getChildByTag(eIndex+2);
+            if(pUnit2!=NULL)
+            {
+                pUnit2->stopAllActions();
+                pUnit2->runAction(CCMoveTo::create(1, unitsPos[(enUnitIndex)(eIndex+1)]));
+            }
+        }
+        else
+        {
+            Unit* pUnit = (Unit*)getChildByTag(eIndex+2);
+            if(pUnit!=NULL)
+            {
+                pUnit->stopAllActions();
+                pUnit->runAction(CCMoveTo::create(1, unitsPos[(enUnitIndex)(eIndex)]));
+            }
+        }
     }
 }
